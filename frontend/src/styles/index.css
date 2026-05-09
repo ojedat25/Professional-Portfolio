@@ -1,15 +1,22 @@
+/* Portfolio palette: bg, text, accent, secondary, highlight, muted */
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
+  /* Core palette */
+  --bg: #0c0f0a;
+  --text: #ffffff;
+  --text-h: #ffffff;
+  --muted: #888888;
+  --accent: #8b1a33;
+  --secondary: #dcab6b;
+  --highlight: #41ead4;
+
+  /* Derived surfaces */
+  --border: rgba(255, 255, 255, 0.12);
+  --code-bg: rgba(255, 255, 255, 0.06);
+  --accent-bg: rgba(139, 26, 51, 0.22);
+  --accent-border: rgba(139, 26, 51, 0.55);
+  --social-bg: rgba(65, 234, 212, 0.1);
   --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+    rgba(0, 0, 0, 0.5) 0 12px 28px -6px, rgba(65, 234, 212, 0.08) 0 0 0 1px;
 
   --sans: system-ui, "Segoe UI", Roboto, sans-serif;
   --heading: system-ui, "Segoe UI", Roboto, sans-serif;
@@ -17,7 +24,7 @@
 
   font: 18px/145% var(--sans);
   letter-spacing: 0.18px;
-  color-scheme: light dark;
+  color-scheme: dark;
   color: var(--text);
   background: var(--bg);
   font-synthesis: none;
@@ -27,26 +34,6 @@
 
   @media (max-width: 1024px) {
     font-size: 16px;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
   }
 }
 
@@ -114,7 +101,7 @@ code {
   font-size: 16px;
   padding: 5px 10px;
   border-radius: 5px;
-  color: var(--accent);
+  color: var(--text);
   background: var(--accent-bg);
   border: 2px solid transparent;
   transition: border-color 0.3s;
@@ -124,7 +111,7 @@ code {
     border-color: var(--accent-border);
   }
   &:focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--highlight);
     outline-offset: 2px;
   }
 }
@@ -237,10 +224,13 @@ code {
     align-items: center;
     gap: 8px;
     text-decoration: none;
-    transition: box-shadow 0.3s;
+    transition:
+      box-shadow 0.3s,
+      color 0.2s;
 
     &:hover {
       box-shadow: var(--shadow);
+      color: var(--highlight);
     }
     .button-icon {
       height: 18px;
