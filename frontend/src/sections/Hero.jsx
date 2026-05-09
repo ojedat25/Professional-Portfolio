@@ -13,14 +13,11 @@ export default function Hero() {
   return (
     <section className="hero" aria-labelledby="hero-heading">
       <div className="layout-inner hero__inner">
-        <p className="section-label">Software developer — Minneapolis</p>
+        <p className="section-label">{siteContent.heroEyebrow}</p>
         <h1 id="hero-heading" className="hero__name">
           Toni Ojeda<span className="hero__dot">.</span>
         </h1>
-        <p className="hero__lede muted">
-          I build full-stack apps,
-          ship real features, and care about how things actually work.
-        </p>
+        <p className="hero__lede muted">{siteContent.heroLede}</p>
         <div className="hero__actions">
           <a
             className="button button--primary"

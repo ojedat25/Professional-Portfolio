@@ -1,6 +1,7 @@
 import Navbar from "./components/Navbar.jsx";
 import Hero from "./sections/Hero.jsx";
 import Projects from "./sections/Projects.jsx";
+import Skills from "./sections/Skills.jsx";
 import About from "./sections/About.jsx";
 
 export default function App() {
@@ -16,6 +17,15 @@ export default function App() {
         >
           <div className="layout-inner section__inner">
             <Projects />
+          </div>
+        </section>
+        <section
+          id="skills"
+          className="section section--skills"
+          aria-labelledby="skills-label"
+        >
+          <div className="layout-inner section__inner">
+            <Skills />
           </div>
         </section>
         <section

@@ -12,6 +12,7 @@
 }
 
 #work,
+#skills,
 #about {
   scroll-margin-top: var(--nav-h);
 }
@@ -21,6 +22,10 @@
 }
 
 .section--work {
+  border-top: 1px solid var(--border);
+}
+
+.section--skills {
   border-top: 1px solid var(--border);
 }
 
@@ -144,10 +149,111 @@
   color: var(--highlight);
 }
 
+.projects__carousel {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.projects__nav-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  margin: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--bg) 90%, var(--highlight));
+  color: var(--highlight);
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    color 0.2s;
+}
+
+.projects__nav-btn:hover:not(:disabled) {
+  border-color: var(--highlight);
+  background: var(--social-bg);
+  color: var(--text-h);
+}
+
+.projects__nav-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
 .projects__grid {
   display: grid;
   gap: 1.5rem;
   grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+
+.projects__carousel .projects__grid {
+  min-width: 0;
+  flex: 1;
+}
+
+.projects__grid--carousel {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 960px) {
+  .projects__grid--carousel {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Skills */
+.skills__groups {
+  display: grid;
+  gap: 2rem;
+}
+
+@media (min-width: 900px) {
+  .skills__groups {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem 2rem;
+    align-items: start;
+  }
+}
+
+.skills__heading {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--secondary);
+  margin: 0 0 0.75rem;
+}
+
+.skills__chips {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.skill-chip {
+  display: inline-block;
+  font-size: 0.82rem;
+  padding: 0.35rem 0.55rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  color: color-mix(in srgb, var(--text) 92%, var(--muted));
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.project-card__placeholder {
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.45;
+  margin-top: 0.25rem;
 }
 
 .project-card {
@@ -221,11 +327,77 @@
   }
 }
 
+.about__main {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
 .about__bio {
   font-size: 1.05rem;
   line-height: 1.65;
   color: color-mix(in srgb, var(--text) 88%, var(--muted));
   max-width: 40rem;
+}
+
+.about__bio--secondary {
+  font-size: 0.98rem;
+  opacity: 0.95;
+}
+
+.about__block {
+  margin-top: 0.25rem;
+}
+
+.about__subhead {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-h);
+  margin: 0 0 0.5rem;
+}
+
+.about__list {
+  margin: 0;
+  padding-left: 1.15rem;
+  max-width: 40rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.about__list li + li {
+  margin-top: 0.4rem;
+}
+
+.about__experience {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 40rem;
+}
+
+.about__job-title {
+  font-weight: 600;
+  font-size: 0.98rem;
+  color: var(--text-h);
+  margin: 0;
+}
+
+.about__job-meta {
+  font-size: 0.8rem;
+  color: var(--secondary);
+  margin: 0.15rem 0 0.35rem;
+  letter-spacing: 0.03em;
+}
+
+.about__job-line {
+  font-size: 0.93rem;
+  line-height: 1.55;
+  color: var(--muted);
+  margin: 0;
 }
 
 .about__cta-heading {
