@@ -151,8 +151,18 @@
 
 .projects__carousel {
   display: flex;
-  align-items: center;
   gap: 1rem;
+}
+
+.projects__carousel--desktop {
+  flex-direction: row;
+  align-items: center;
+}
+
+.projects__carousel--mobile {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.75rem;
 }
 
 .projects__nav-btn {
@@ -186,13 +196,25 @@
   cursor: not-allowed;
 }
 
+.projects__nav-btn--mobile {
+  width: 100%;
+  min-height: 2.75rem;
+  height: auto;
+}
+
+.projects__carousel--mobile .projects__grid {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: 100%;
+}
+
 .projects__grid {
   display: grid;
   gap: 1.5rem;
   grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
 }
 
-.projects__carousel .projects__grid {
+.projects__carousel--desktop .projects__grid {
   min-width: 0;
   flex: 1;
 }
@@ -201,10 +223,11 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-@media (max-width: 960px) {
-  .projects__grid--carousel {
-    grid-template-columns: 1fr;
-  }
+.projects__grid--mobile {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+  width: 100%;
 }
 
 /* Skills */
@@ -254,6 +277,56 @@
   color: var(--muted);
   line-height: 1.45;
   margin-top: 0.25rem;
+}
+
+.project-card--mobile {
+  padding: 1rem 1.1rem;
+  gap: 0;
+  min-height: 0;
+}
+
+.project-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  min-width: 0;
+}
+
+.project-card--mobile .project-card__title {
+  font-size: 1.05rem;
+  line-height: 1.25;
+}
+
+.project-card__desc--clamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.project-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem 0.75rem;
+  margin-top: 0.75rem;
+  padding-top: 0.65rem;
+  border-top: 1px solid var(--border);
+}
+
+.project-card--mobile .project-card__tags {
+  flex: 1 1 auto;
+  justify-content: flex-start;
+  min-width: 0;
+}
+
+.project-card--mobile .project-card__link,
+.project-card--mobile .project-card__placeholder {
+  flex-shrink: 0;
+  margin-top: 0;
 }
 
 .project-card {

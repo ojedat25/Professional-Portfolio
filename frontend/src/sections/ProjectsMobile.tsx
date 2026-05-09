@@ -1,14 +1,13 @@
 import { useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import ProjectCard from "../components/ProjectCard";
+import { ChevronDown, ChevronUp } from "lucide-react";
+import MobileProjectCard from "../components/MobileProjectCard";
 import { siteContent } from "../data/siteContent";
 import {
   getProjectCarouselBounds,
   visibleProjectPage,
 } from "../data/projectsCarousel";
 
-/** Desktop-only projects carousel; use [`ProjectsMobile`] for narrow viewports. */
-export default function Projects() {
+export default function ProjectsMobile() {
   const { projects } = siteContent;
   const { showNav, maxStart } = getProjectCarouselBounds(projects.length);
   const [startIndex, setStartIndex] = useState(0);
@@ -24,24 +23,24 @@ export default function Projects() {
   }
 
   return (
-    <div className="projects projects--desktop">
+    <div className="projects projects--mobile">
       <p id="work-label" className="section-label">
         Selected work
       </p>
       {showNav ? (
-        <div className="projects__carousel projects__carousel--desktop">
+        <div className="projects__carousel projects__carousel--mobile">
           <button
             type="button"
-            className="projects__nav-btn"
+            className="projects__nav-btn projects__nav-btn--mobile"
             onClick={goPrev}
             disabled={startIndex === 0}
             aria-label="Previous projects"
           >
-            <ChevronLeft size={26} strokeWidth={2} aria-hidden="true" />
+            <ChevronUp size={26} strokeWidth={2} aria-hidden="true" />
           </button>
-          <div className="projects__grid projects__grid--carousel">
+          <div className="projects__grid projects__grid--mobile">
             {visible.map((project) => (
-              <ProjectCard
+              <MobileProjectCard
                 key={project.id}
                 title={project.title}
                 description={project.description}
@@ -52,18 +51,18 @@ export default function Projects() {
           </div>
           <button
             type="button"
-            className="projects__nav-btn"
+            className="projects__nav-btn projects__nav-btn--mobile"
             onClick={goNext}
             disabled={startIndex >= maxStart}
             aria-label="Next projects"
           >
-            <ChevronRight size={26} strokeWidth={2} aria-hidden="true" />
+            <ChevronDown size={26} strokeWidth={2} aria-hidden="true" />
           </button>
         </div>
       ) : (
-        <div className="projects__grid">
+        <div className="projects__grid projects__grid--mobile">
           {projects.map((project) => (
-            <ProjectCard
+            <MobileProjectCard
               key={project.id}
               title={project.title}
               description={project.description}
