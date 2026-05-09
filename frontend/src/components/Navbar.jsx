@@ -18,7 +18,7 @@ export default function Navbar() {
     <header className="site-nav">
       <div className="layout-inner site-nav__inner">
         <a className="site-nav__brand" href="/" onClick={scrollToTop}>
-          toni.dev
+          dev-toni.me
         </a>
         <nav className="site-nav__links" aria-label="Primary">
           <a
