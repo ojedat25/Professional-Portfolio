@@ -47,12 +47,16 @@
   position: sticky;
   top: 0;
   z-index: 20;
+  display: flex;
+  flex-direction: column;
   border-bottom: 1px solid var(--border);
   background: color-mix(in srgb, var(--bg) 92%, transparent);
   backdrop-filter: blur(10px);
 }
 
 .site-nav__inner {
+  position: relative;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -81,6 +85,73 @@
 
 .site-nav__link:hover {
   color: var(--highlight);
+}
+
+.site-nav__menu-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--bg) 90%, var(--highlight));
+  color: var(--highlight);
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    color 0.2s;
+}
+
+.site-nav__menu-btn:hover {
+  border-color: var(--highlight);
+  background: var(--social-bg);
+  color: var(--text-h);
+}
+
+.site-nav__mobile-wrap {
+  position: relative;
+  z-index: 2;
+  padding-bottom: 0.5rem;
+}
+
+.site-nav__mobile-wrap[hidden] {
+  display: none !important;
+}
+
+.site-nav__panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.75rem 0 0.5rem;
+  margin-top: 0.25rem;
+  border-top: 1px solid var(--border);
+}
+
+.site-nav__link--stacked {
+  display: block;
+  padding: 0.65rem 0.35rem;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.site-nav__link--stacked:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.site-nav__backdrop {
+  position: fixed;
+  inset: 0;
+  /* Below .site-nav__inner / panel (z-index: 2) so links and toggle receive clicks */
+  z-index: 1;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.4);
 }
 
 .hero__inner {
@@ -504,6 +575,12 @@
 
 .button:focus-visible,
 .site-nav__brand:focus-visible,
-.site-nav__link:focus-visible {
+.site-nav__link:focus-visible,
+.site-nav__menu-btn:focus-visible {
   outline-offset: 3px;
+}
+
+.site-nav__backdrop:focus-visible {
+  outline: 2px solid var(--highlight);
+  outline-offset: 2px;
 }
