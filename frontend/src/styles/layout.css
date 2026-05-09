@@ -149,10 +149,62 @@
   color: var(--highlight);
 }
 
+.projects__carousel {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.projects__nav-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  margin: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--bg) 90%, var(--highlight));
+  color: var(--highlight);
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    color 0.2s;
+}
+
+.projects__nav-btn:hover:not(:disabled) {
+  border-color: var(--highlight);
+  background: var(--social-bg);
+  color: var(--text-h);
+}
+
+.projects__nav-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
 .projects__grid {
   display: grid;
   gap: 1.5rem;
   grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+
+.projects__carousel .projects__grid {
+  min-width: 0;
+  flex: 1;
+}
+
+.projects__grid--carousel {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 960px) {
+  .projects__grid--carousel {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Skills */

@@ -94,5 +94,21 @@ export const siteContent = {
       tags: ["Electron", "React", "TypeScript", "Django", "PostgreSQL"],
       href: "https://github.com/ojedat25/Auggie-Task-Manager/tree/main",
     },
+    {
+      id: "barbershop",
+      title: "Barbershop Website",
+      description:
+        "Freelance client site for a local barber - React and Vite with real shop photography. I collaborate on requirements and deliver a usable, visual interface.",
+      tags: ["React", "Vite"],
+      href: "#",
+    },
+    {
+      id: "sureattend-stripe",
+      title: "SureAttend Stripe",
+      description:
+        "Product lead for Stripe payment integration from RFC through implementation. Checkout flows across Django REST backend and React/Vite frontend; full detail on the resume.",
+      tags: ["Stripe", "Django", "React"],
+      href: "#",
+    },
   ],
 };
