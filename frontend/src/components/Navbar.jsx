@@ -30,6 +30,13 @@ export default function Navbar() {
           </a>
           <a
             className="site-nav__link"
+            href="#skills"
+            onClick={(e) => scrollToId(e, "skills")}
+          >
+            Skills
+          </a>
+          <a
+            className="site-nav__link"
             href="#about"
             onClick={(e) => scrollToId(e, "about")}
           >

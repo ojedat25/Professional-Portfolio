@@ -1,6 +1,7 @@
 export default function ProjectCard({ title, description, tags, href }) {
   const tagList = Array.isArray(tags) ? tags : [];
   const external = typeof href === "string" && /^https?:\/\//i.test(href);
+  const isPlaceholder = !href || href === "#";
 
   return (
     <article className="project-card">
@@ -15,13 +16,20 @@ export default function ProjectCard({ title, description, tags, href }) {
           ))}
         </ul>
       ) : null}
-      <a
-        className="project-card__link"
-        href={href}
-        {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-      >
-        View project <span aria-hidden="true">↗</span>
-      </a>
+      {isPlaceholder ? (
+        <span className="project-card__placeholder">
+          Public link coming soon - see resume for full detail.
+        </span>
+      ) : (
+        <a
+          className="project-card__link"
+          href={href}
+          target={external ? "_blank" : undefined}
+          rel={external ? "noopener noreferrer" : undefined}
+        >
+          View project <span aria-hidden="true">↗</span>
+        </a>
+      )}
     </article>
   );
 }
