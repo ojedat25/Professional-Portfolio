@@ -1,6 +1,7 @@
-import { siteContent } from "../data/siteContent.js";
+import type { MouseEvent } from "react";
+import { siteContent } from "../data/siteContent";
 
-function scrollToWork(event) {
+function scrollToWork(event: MouseEvent<HTMLAnchorElement>) {
   event.preventDefault();
   const el = document.getElementById("work");
   if (el) {

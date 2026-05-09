@@ -1,4 +1,16 @@
-export default function ProjectCard({ title, description, tags, href }) {
+export type ProjectCardProps = {
+  title: string;
+  description: string;
+  tags: string[];
+  href: string;
+};
+
+export default function ProjectCard({
+  title,
+  description,
+  tags,
+  href,
+}: ProjectCardProps) {
   const tagList = Array.isArray(tags) ? tags : [];
   const external = typeof href === "string" && /^https?:\/\//i.test(href);
   const isPlaceholder = !href || href === "#";

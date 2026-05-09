@@ -1,10 +1,44 @@
 import resumeUrl from "../assets/resume.pdf?url";
 
+export type Project = {
+  id: string;
+  title: string;
+  description: string;
+  tags: string[];
+  href: string;
+};
+
+export type ExperienceHighlight = {
+  title: string;
+  meta: string;
+  oneLiner: string;
+};
+
+export type SkillsBlock = {
+  technical: string[];
+  languages: string[];
+  soft: string[];
+};
+
+export type SiteContent = {
+  email: string;
+  githubUrl: string;
+  linkedinUrl: string;
+  resumeUrl: string;
+  heroEyebrow: string;
+  heroLede: string;
+  bio: string;
+  aboutExtra: string[];
+  educationShort: string[];
+  experienceHighlights: ExperienceHighlight[];
+  skills: SkillsBlock;
+  projects: Project[];
+};
+
 /**
  * Site copy aligned with resume. Update links when you publish repos or demos.
  */
-
-export const siteContent = {
+export const siteContent: SiteContent = {
   email: "toniojeda2015@gmail.com",
   githubUrl: "https://github.com/ojedat25",
   linkedinUrl: "https://www.linkedin.com/in/ojedat20/",

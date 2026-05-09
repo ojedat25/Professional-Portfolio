@@ -1,4 +1,4 @@
-import { siteContent } from "../data/siteContent.js";
+import { siteContent } from "../data/siteContent";
 
 export default function Skills() {
   const { skills } = siteContent;

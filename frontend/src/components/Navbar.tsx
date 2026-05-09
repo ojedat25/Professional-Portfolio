@@ -1,4 +1,6 @@
-function scrollToId(event, id) {
+import type { MouseEvent } from "react";
+
+function scrollToId(event: MouseEvent<HTMLAnchorElement>, id: string) {
   event.preventDefault();
   const el = document.getElementById(id);
   if (el) {
@@ -7,7 +9,7 @@ function scrollToId(event, id) {
   }
 }
 
-function scrollToTop(event) {
+function scrollToTop(event: MouseEvent<HTMLAnchorElement>) {
   event.preventDefault();
   window.scrollTo({ top: 0, behavior: "smooth" });
   history.replaceState(null, "", window.location.pathname || "/");

@@ -1,6 +1,9 @@
-import { siteContent } from "../data/siteContent.js";
+import type { AnchorHTMLAttributes } from "react";
+import { siteContent } from "../data/siteContent";
 
-function outboundProps(href) {
+function outboundProps(
+  href: string,
+): Pick<AnchorHTMLAttributes<HTMLAnchorElement>, "target" | "rel"> {
   if (!href || href === "#") {
     return {};
   }
@@ -22,7 +25,7 @@ export default function About() {
       <div className="about__grid">
         <div className="about__main">
           <p className="about__bio">{siteContent.bio}</p>
-          {siteContent.aboutExtra?.map((para) => (
+          {siteContent.aboutExtra.map((para) => (
             <p key={para} className="about__bio about__bio--secondary">
               {para}
             </p>

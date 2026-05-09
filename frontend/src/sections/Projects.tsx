@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import ProjectCard from "../components/ProjectCard.jsx";
-import { siteContent } from "../data/siteContent.js";
+import ProjectCard from "../components/ProjectCard";
+import { siteContent } from "../data/siteContent";
 
 export default function Projects() {
   const { projects } = siteContent;

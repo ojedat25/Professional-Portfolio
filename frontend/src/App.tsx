@@ -1,8 +1,8 @@
-import Navbar from "./components/Navbar.jsx";
-import Hero from "./sections/Hero.jsx";
-import Projects from "./sections/Projects.jsx";
-import Skills from "./sections/Skills.jsx";
-import About from "./sections/About.jsx";
+import Navbar from "./components/Navbar";
+import Hero from "./sections/Hero";
+import Projects from "./sections/Projects";
+import Skills from "./sections/Skills";
+import About from "./sections/About";
 
 export default function App() {
   return (
