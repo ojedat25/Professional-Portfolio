@@ -24,7 +24,7 @@ export async function apiRequest<T>(
   });
 
   const text = await response.text();
-  const payload = text ? safeJsonParse(text) : null;
+  const payload = text.trim() ? safeJsonParse(text) : null;
 
   if (!response.ok) {
     throw new ApiError(
