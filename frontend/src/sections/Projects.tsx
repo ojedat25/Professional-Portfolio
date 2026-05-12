@@ -1,15 +1,18 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import ProjectCard from "../components/ProjectCard";
-import { siteContent } from "../data/siteContent";
+import type { GithubRepo } from "../api";
 import {
   getProjectCarouselBounds,
   visibleProjectPage,
 } from "../data/projectsCarousel";
 
+type Props = {
+  projects: GithubRepo[];
+};
+
 /** Desktop-only projects carousel; use [`ProjectsMobile`] for narrow viewports. */
-export default function Projects() {
-  const { projects } = siteContent;
+export default function Projects({ projects }: Props) {
   const { showNav, maxStart } = getProjectCarouselBounds(projects.length);
   const [startIndex, setStartIndex] = useState(0);
 
@@ -44,7 +47,7 @@ export default function Projects() {
               <ProjectCard
                 key={project.id}
                 title={project.title}
-                description={project.description}
+                description={project.description ?? ""}
                 tags={project.tags}
                 href={project.href}
               />
@@ -66,7 +69,7 @@ export default function Projects() {
             <ProjectCard
               key={project.id}
               title={project.title}
-              description={project.description}
+              description={project.description ?? ""}
               tags={project.tags}
               href={project.href}
             />

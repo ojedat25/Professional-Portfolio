@@ -1,13 +1,5 @@
 import resumeUrl from "../assets/resume.pdf?url";
 
-export type Project = {
-  id: string;
-  title: string;
-  description: string;
-  tags: string[];
-  href: string;
-};
-
 export type ExperienceHighlight = {
   title: string;
   meta: string;
@@ -32,7 +24,6 @@ export type SiteContent = {
   educationShort: string[];
   experienceHighlights: ExperienceHighlight[];
   skills: SkillsBlock;
-  projects: Project[];
 };
 
 /**
@@ -46,16 +37,19 @@ export const siteContent: SiteContent = {
 
   heroEyebrow: "Software developer - Minneapolis",
   heroLede:
-    "Full-stack developer finishing my CS degree at Augsburg (May 2026). I intern at SureAttend on Django REST and React/Vite, and I'm fluent in English and Spanish.",
+    "I'm Toni, a full-stack developer based in Minneapolis. I build apps and websites, and I build them well.",
 
-  bio: `I'm a full-stack developer who ships real products - currently as a software intern at SureAttend, where I've led features like our Stripe integration across the stack. I care about clear UX, solid APIs, and integrations that hold up in production.`,
+  bio: `I just finished my Computer Science degree at Augsburg University, and I've spent the last couple years building actual things alongside my coursework. A payment integration at my internship, a desktop app with my senior team, an iOS nutrition tracker I built for myself because I couldn't find one I liked.
+
+
+I like understanding how things work. That goes for code, but also just in general. I stay on top of what's happening in tech, spend time gaming, and tend to go deep on whatever I'm into at the moment.`,
 
   aboutExtra: [
-    "For degrees and timeline, see education below; for full bullets on internships and prior roles, grab the PDF - this page stays short on purpose.",
+    "For degrees and timeline, see education below; for full bullets on internships and prior roles, grab the PDF",
   ],
 
   educationShort: [
-    "B.S. Computer Science, minor in Data Science - Augsburg University, Minneapolis, MN (expected May 2026)",
+    "B.S. Computer Science, minor in Data Science - Augsburg University, Minneapolis, MN (May 2026)",
     "A.S. Computer Science - Anoka Ramsey Community College, Coon Rapids, MN (May 2024)",
   ],
 
@@ -102,47 +96,4 @@ export const siteContent: SiteContent = {
       "Continuous self-improvement",
     ],
   },
-
-  projects: [
-    {
-      id: "macroscout",
-      title: "MacroScout",
-      description:
-        "iOS nutrition tracker built in SwiftUI with USDA FoodData Central integration and SwiftData persistence.",
-      tags: ["SwiftUI", "SwiftData", "iOS"],
-      href: "https://github.com/ojedat25/MacroScout",
-    },
-    {
-      id: "meal-plans",
-      title: "Augsburg Meal Plans & Housing Data Visualization",
-      description:
-        "Collected years of archived housing and meal-plan data via the Wayback Machine, then analyzed and charted it in R, ggplot2, and Quarto - including trend context against food inflation.",
-      tags: ["R", "ggplot2", "Quarto"],
-      href: "#",
-    },
-    {
-      id: "auggie-task-manager",
-      title: "Auggie Task Manager",
-      description:
-        "Academic desktop app: Electron, React, TypeScript, Django REST, PostgreSQL. Imports Moodle assignments over iCal with a 0-3 difficulty heuristic; team delivery with Jira and GitHub.",
-      tags: ["Electron", "React", "TypeScript", "Django", "PostgreSQL"],
-      href: "https://github.com/ojedat25/Auggie-Task-Manager/tree/main",
-    },
-    {
-      id: "barbershop",
-      title: "Barbershop Website",
-      description:
-        "Freelance client site for a local barber - React and Vite with real shop photography. I collaborate on requirements and deliver a usable, visual interface.",
-      tags: ["React", "Vite"],
-      href: "#",
-    },
-    {
-      id: "sureattend-stripe",
-      title: "SureAttend Stripe",
-      description:
-        "Product lead for Stripe payment integration from RFC through implementation. Checkout flows across Django REST backend and React/Vite frontend; full detail on the resume.",
-      tags: ["Stripe", "Django", "React"],
-      href: "#",
-    },
-  ],
 };

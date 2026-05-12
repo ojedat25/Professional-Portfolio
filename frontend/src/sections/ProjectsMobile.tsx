@@ -1,14 +1,17 @@
 import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import MobileProjectCard from "../components/MobileProjectCard";
-import { siteContent } from "../data/siteContent";
+import type { GithubRepo } from "../api";
 import {
   getProjectCarouselBounds,
   visibleProjectPage,
 } from "../data/projectsCarousel";
 
-export default function ProjectsMobile() {
-  const { projects } = siteContent;
+type Props = {
+  projects: GithubRepo[];
+};
+
+export default function ProjectsMobile({ projects }: Props) {
   const { showNav, maxStart } = getProjectCarouselBounds(projects.length);
   const [startIndex, setStartIndex] = useState(0);
 
@@ -43,7 +46,7 @@ export default function ProjectsMobile() {
               <MobileProjectCard
                 key={project.id}
                 title={project.title}
-                description={project.description}
+                description={project.description ?? ""}
                 tags={project.tags}
                 href={project.href}
               />
@@ -65,7 +68,7 @@ export default function ProjectsMobile() {
             <MobileProjectCard
               key={project.id}
               title={project.title}
-              description={project.description}
+              description={project.description ?? ""}
               tags={project.tags}
               href={project.href}
             />

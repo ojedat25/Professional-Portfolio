@@ -1,5 +1,3 @@
-import type { Project } from "./siteContent";
-
 export const PROJECTS_PAGE_SIZE = 3;
 
 /** Matches carousel layout CSS ([`layout.css`]) and [`useIsNarrowProjects`]. */
@@ -18,13 +16,13 @@ export function getProjectCarouselBounds(
   return { showNav, maxStart };
 }
 
-export function visibleProjectPage(
-  projects: Project[],
+export function visibleProjectPage<T>(
+  items: T[],
   startIndex: number,
   showNav: boolean,
-): Project[] {
+): T[] {
   if (!showNav) {
-    return projects;
+    return items;
   }
-  return projects.slice(startIndex, startIndex + PROJECTS_PAGE_SIZE);
+  return items.slice(startIndex, startIndex + PROJECTS_PAGE_SIZE);
 }
