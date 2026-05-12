@@ -37,16 +37,19 @@ export const siteContent: SiteContent = {
 
   heroEyebrow: "Software developer - Minneapolis",
   heroLede:
-    "Full-stack developer finishing my CS degree at Augsburg (May 2026). I intern at SureAttend on Django REST and React/Vite, and I'm fluent in English and Spanish.",
+    "I'm Toni, a full-stack developer based in Minneapolis. I build apps and websites, and I build them well.",
 
-  bio: `I'm a full-stack developer who ships real products - currently as a software intern at SureAttend, where I've led features like our Stripe integration across the stack. I care about clear UX, solid APIs, and integrations that hold up in production.`,
+  bio: `I just finished my Computer Science degree at Augsburg University, and I've spent the last couple years building actual things alongside my coursework. A payment integration at my internship, a desktop app with my senior team, an iOS nutrition tracker I built for myself because I couldn't find one I liked.
+
+
+I like understanding how things work. That goes for code, but also just in general. I stay on top of what's happening in tech, spend time gaming, and tend to go deep on whatever I'm into at the moment.`,
 
   aboutExtra: [
-    "For degrees and timeline, see education below; for full bullets on internships and prior roles, grab the PDF - this page stays short on purpose.",
+    "For degrees and timeline, see education below; for full bullets on internships and prior roles, grab the PDF",
   ],
 
   educationShort: [
-    "B.S. Computer Science, minor in Data Science - Augsburg University, Minneapolis, MN (expected May 2026)",
+    "B.S. Computer Science, minor in Data Science - Augsburg University, Minneapolis, MN (May 2026)",
     "A.S. Computer Science - Anoka Ramsey Community College, Coon Rapids, MN (May 2024)",
   ],
 
