@@ -14,6 +14,12 @@ export type GithubRepo = {
 };
 
 /** Fetch portfolio-tagged repos from the Django backend. */
-export function fetchGithubRepos(signal?: AbortSignal): Promise<GithubRepo[]> {
-  return apiRequest<GithubRepo[]>("/github/repos/", { signal });
+export async function fetchGithubRepos(
+  signal?: AbortSignal,
+): Promise<GithubRepo[]> {
+  const data = await apiRequest<GithubRepo[]>("/github/repos/", { signal });
+  if (!Array.isArray(data)) {
+    throw new TypeError(`Expected array of repos, got ${typeof data}`);
+  }
+  return data;
 }
