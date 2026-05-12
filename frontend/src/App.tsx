@@ -1,14 +1,10 @@
 import Navbar from "./components/Navbar";
 import Hero from "./sections/Hero";
-import Projects from "./sections/Projects";
-import ProjectsMobile from "./sections/ProjectsMobile";
+import ProjectsSection from "./sections/ProjectsSection";
 import Skills from "./sections/Skills";
 import About from "./sections/About";
-import { useIsNarrowProjects } from "./hooks/useMediaQuery";
 
 export default function App() {
-  const isNarrow = useIsNarrowProjects();
-
   return (
     <>
       <Navbar />
@@ -20,7 +16,7 @@ export default function App() {
           aria-labelledby="work-label"
         >
           <div className="layout-inner section__inner">
-            {isNarrow ? <ProjectsMobile /> : <Projects />}
+            <ProjectsSection />
           </div>
         </section>
         <section
