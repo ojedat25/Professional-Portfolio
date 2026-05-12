@@ -1,13 +1,15 @@
 from django.http import JsonResponse
-from .utils import get_github_repos
 from django.views.decorators.http import require_GET
 
+from .utils import get_github_repos
+from .serializers import GitHubRepoSerializer
 
-# Create your views here.
+
 @require_GET
 def get_repos(request):
-    try:
-        data = get_github_repos("ojedat25")
-        return JsonResponse(data)
-    except Exception as e:
-        return JsonResponse({"error": str(e)}, status=500)
+    data = get_github_repos("ojedat25")
+    if isinstance(data, dict) and "error" in data:
+        return JsonResponse(data, status=502)
+
+    serializer = GitHubRepoSerializer(data, many=True)
+    return JsonResponse(serializer.data, safe=False)
