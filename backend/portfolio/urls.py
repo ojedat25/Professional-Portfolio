@@ -22,4 +22,5 @@ from django.urls import include
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/github/", include("github.urls")),
+    path("api/periodic_tasks/", include("periodic_tasks.urls")),
 ]
