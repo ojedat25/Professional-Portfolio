@@ -153,4 +153,8 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-CORS_ALLOWED_ORIGINS = env("CORS_ALLOWED_ORIGINS")
+CORS_ALLOWED_ORIGINS = env("CORS_ALLOWED_ORIGINS", default=["http://localhost:5173"])
+
+ADMIN_PASSWORD_HASH = env("ADMIN_PASSWORD_HASH", default=None)
+
+GITHUB_TOKEN = env("GITHUB_TOKEN", default=None)
