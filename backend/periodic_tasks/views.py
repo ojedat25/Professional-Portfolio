@@ -6,7 +6,5 @@ from rest_framework.permissions import AllowAny
 from rest_framework.decorators import permission_classes
 
 @require_GET
-@method_decorator(csrf_exempt, name="dispatch")
-@permission_classes([AllowAny])
 def ping(request):
     return JsonResponse({"status": "ok"})
