@@ -7,7 +7,6 @@ services:
     rootDir: backend
     buildCommand: |
       pip install -r ../requirements.txt
-      python manage.py collectstatic --no-input
       python manage.py migrate
     startCommand: gunicorn portfolio.wsgi:application
     healthCheckPath: /api/periodic_tasks/ping/
