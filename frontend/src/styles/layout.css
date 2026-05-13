@@ -1,3 +1,6 @@
+/* Layout-only; palette comes from index.css (--bg, etc. on html[data-theme]). */
+
+/* Centered column with responsive side padding and max width. */
 .layout-inner {
   width: min(var(--page-max), 100%);
   margin-inline: auto;
@@ -5,12 +8,14 @@
   box-sizing: border-box;
 }
 
+/* Fills viewport height below the navbar. */
 .main {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
+/* Offset for sticky nav when jumping via #hash. */
 #work,
 #skills,
 #about {
@@ -34,6 +39,7 @@
   padding-bottom: clamp(3rem, 10vw, 6rem);
 }
 
+/* Small uppercase section titles. */
 .section-label {
   margin: 0 0 1.25rem;
   font-size: 0.7rem;
@@ -43,6 +49,7 @@
   color: var(--secondary);
 }
 
+/* Sticky navbar with tinted blur over page content. */
 .site-nav {
   position: sticky;
   top: 0;
@@ -54,6 +61,7 @@
   backdrop-filter: blur(10px);
 }
 
+/* One horizontal row on wide screens (brand opposite actions). */
 .site-nav__inner {
   position: relative;
   z-index: 2;
@@ -62,6 +70,23 @@
   justify-content: space-between;
   min-height: var(--nav-h);
   gap: 1rem;
+}
+
+/* Narrow breakpoint: theme + menu buttons in a cluster. */
+.site-nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+/* Wide breakpoint: anchor links grouped with theme control. */
+.site-nav__end {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: clamp(1rem, 3vw, 1.5rem);
+  justify-content: flex-end;
 }
 
 .site-nav__brand {
@@ -87,6 +112,7 @@
   color: var(--highlight);
 }
 
+/* Same chrome for hamburger menu button. */
 .site-nav__menu-btn {
   flex-shrink: 0;
   display: inline-flex;
@@ -112,6 +138,54 @@
   color: var(--text-h);
 }
 
+/* Pill button: icon plus a readable label/mode inside one hit target. */
+.site-nav__theme-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 2.75rem;
+  padding: 0 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--bg) 90%, var(--highlight));
+  color: var(--highlight);
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    color 0.2s;
+}
+
+.site-nav__theme-btn:hover {
+  border-color: var(--highlight);
+  background: var(--social-bg);
+  color: var(--text-h);
+}
+
+.site-nav__theme-text {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.05rem;
+  line-height: 1;
+}
+
+.site-nav__theme-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text) 88%, var(--muted));
+}
+
+.site-nav__theme-mode {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text-h);
+}
+
+/* Expandable drawer content below bar on small screens. */
 .site-nav__mobile-wrap {
   position: relative;
   z-index: 2;
@@ -122,6 +196,7 @@
   display: none !important;
 }
 
+/* Vertical anchor list when menu is open. */
 .site-nav__panel {
   display: flex;
   flex-direction: column;
@@ -139,19 +214,20 @@
 }
 
 .site-nav__link--stacked:hover {
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--surface-hover);
 }
 
+/* Dims page behind expanded mobile panel; click closes menu. */
 .site-nav__backdrop {
   position: fixed;
   inset: 0;
-  /* Below .site-nav__inner / panel (z-index: 2) so links and toggle receive clicks */
+  /* Below inner row and panel so bar controls stay clickable. */
   z-index: 1;
   margin: 0;
   padding: 0;
   border: 0;
   cursor: pointer;
-  background: rgba(0, 0, 0, 0.4);
+  background: var(--backdrop-scrim);
 }
 
 .hero__inner {
@@ -197,6 +273,7 @@
     box-shadow 0.25s;
 }
 
+/* Accent-fill CTA. */
 .button--primary {
   background: var(--accent-bg);
   border-color: var(--accent-border);
@@ -209,6 +286,7 @@
   color: var(--highlight);
 }
 
+/* Subtle secondary CTA. */
 .button--ghost {
   background: var(--social-bg);
   border-color: transparent;
@@ -220,6 +298,7 @@
   color: var(--highlight);
 }
 
+/* Flex wrapper for carousel arrows plus grid. */
 .projects__carousel {
   display: flex;
   gap: 1rem;
@@ -236,6 +315,7 @@
   gap: 0.75rem;
 }
 
+/* Prev/next; matches nav icon button look. */
 .projects__nav-btn {
   flex-shrink: 0;
   display: inline-flex;
@@ -279,6 +359,7 @@
   width: 100%;
 }
 
+/* Default fluid grid when not constrained by carousel slot. */
 .projects__grid {
   display: grid;
   gap: 1.5rem;
@@ -290,6 +371,7 @@
   flex: 1;
 }
 
+/* Exactly three tiles in desktop carousel. */
 .projects__grid--carousel {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
@@ -301,7 +383,7 @@
   width: 100%;
 }
 
-/* Skills */
+/* Skill groups; switches to three columns from 900px. */
 .skills__groups {
   display: grid;
   gap: 2rem;
@@ -340,9 +422,29 @@
   border-radius: 6px;
   border: 1px solid var(--border);
   color: color-mix(in srgb, var(--text) 92%, var(--muted));
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--surface-ghost);
 }
 
+/* Repo tile; modifier .project-card--mobile tightens spacing. */
+.project-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface-ghost);
+  transition:
+    border-color 0.2s,
+    box-shadow 0.25s;
+}
+
+.project-card:hover {
+  border-color: color-mix(in srgb, var(--highlight) 35%, var(--border));
+  box-shadow: var(--shadow);
+}
+
+/* No link when repo has no homepage URL to show. */
 .project-card__placeholder {
   font-size: 0.88rem;
   color: var(--muted);
@@ -350,6 +452,7 @@
   margin-top: 0.25rem;
 }
 
+/* Narrow-layout carousel variant. */
 .project-card--mobile {
   padding: 1rem 1.1rem;
   gap: 0;
@@ -371,12 +474,14 @@
 .project-card__desc--clamp {
   display: -webkit-box;
   -webkit-box-orient: vertical;
+  line-clamp: 3;
   -webkit-line-clamp: 3;
   overflow: hidden;
   font-size: 0.88rem;
   line-height: 1.45;
 }
 
+/* Mobile card: separates tag row from action row. */
 .project-card__actions {
   display: flex;
   flex-wrap: wrap;
@@ -398,24 +503,6 @@
 .project-card--mobile .project-card__placeholder {
   flex-shrink: 0;
   margin-top: 0;
-}
-
-.project-card {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  padding: 1.5rem;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.02);
-  transition:
-    border-color 0.2s,
-    box-shadow 0.25s;
-}
-
-.project-card:hover {
-  border-color: color-mix(in srgb, var(--highlight) 35%, var(--border));
-  box-shadow: var(--shadow);
 }
 
 .project-card__desc {
@@ -464,6 +551,7 @@
   align-items: start;
 }
 
+/* Two-column bio + sidebar from tablet width. */
 @media (min-width: 768px) {
   .about__grid {
     grid-template-columns: 1.4fr 1fr;
@@ -573,10 +661,12 @@
   outline-offset: 2px;
 }
 
+/* Extra offset so focused controls read clearly against the bar. */
 .button:focus-visible,
 .site-nav__brand:focus-visible,
 .site-nav__link:focus-visible,
-.site-nav__menu-btn:focus-visible {
+.site-nav__menu-btn:focus-visible,
+.site-nav__theme-btn:focus-visible {
   outline-offset: 3px;
 }
 

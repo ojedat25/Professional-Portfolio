@@ -10,15 +10,13 @@ export default function ProjectsSection() {
   const reposState = useGithubRepos();
   const isNarrow = useIsNarrowProjects();
 
-  if (reposState.status === "loading" || reposState.status === "idle") {
+  if (reposState.status === "loading") {
     return <ProjectsSkeleton isNarrow={isNarrow} />;
   }
 
   if (reposState.status === "error") {
     return (
-      <div
-        className={`projects projects--${isNarrow ? "mobile" : "desktop"}`}
-      >
+      <div className={`projects projects--${isNarrow ? "mobile" : "desktop"}`}>
         <p id="work-label" className="section-label">
           Selected work
         </p>
