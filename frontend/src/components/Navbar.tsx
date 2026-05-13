@@ -160,12 +160,11 @@ function NavbarNarrow() {
           </a>
         </nav>
       </div>
-      {menuOpen
+      {menuOpen && typeof document !== "undefined"
         ? createPortal(
-            <button
-              type="button"
+            <div
               className="site-nav__backdrop"
-              aria-label="Close menu"
+              aria-hidden="true"
               onClick={() => setMenuOpen(false)}
             />,
             document.body,

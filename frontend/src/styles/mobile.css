@@ -77,7 +77,7 @@
     background: var(--surface-hover);
   }
 
-  /* Full-viewport click-catcher (portaled under .site-nav so header blur is not its containing block). */
+  /* Full-viewport click-catcher (portaled to document.body so the viewport is the containing block). */
   .site-nav__backdrop {
     position: fixed;
     inset: 0;
@@ -88,11 +88,6 @@
     border: 0;
     background: transparent;
     cursor: pointer;
-  }
-
-  .site-nav__backdrop:focus-visible {
-    outline: 2px solid var(--highlight);
-    outline-offset: 2px;
   }
 
   .projects__carousel--mobile {
