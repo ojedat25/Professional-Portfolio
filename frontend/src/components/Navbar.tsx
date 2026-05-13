@@ -75,7 +75,7 @@ function ThemeCycleButton() {
       <span className="site-nav__theme-text" aria-hidden="true">
         <span className="site-nav__theme-label">{themeLabelText}</span>
         <span className="site-nav__theme-mode">
-          {theme === "system" ? `${themeModeText}` : themeModeText}
+          {themeModeText}
         </span>
       </span>
     </button>
