@@ -87,7 +87,7 @@
   padding: 0;
   border: 0;
   background: transparent;
-  cursor: default;
+  cursor: pointer;
 }
 
 .site-nav__backdrop:focus-visible {
