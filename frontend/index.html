@@ -1,7 +1,29 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="system">
   <head>
     <meta charset="UTF-8" />
+    <script>
+      (function () {
+        try {
+          var storageKey = "portfolio-theme";
+          var storedPreference = localStorage.getItem(storageKey);
+          if (
+            storedPreference === "light" ||
+            storedPreference === "dark" ||
+            storedPreference === "system"
+          ) {
+            document.documentElement.setAttribute(
+              "data-theme",
+              storedPreference,
+            );
+          } else {
+            document.documentElement.setAttribute("data-theme", "system");
+          }
+        } catch {
+          document.documentElement.setAttribute("data-theme", "system");
+        }
+      })();
+    </script>
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>dev-toni</title>

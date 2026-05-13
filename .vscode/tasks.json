@@ -1,0 +1,74 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Backend — Django (macOS / Linux)",
+      "type": "shell",
+      "command": "${workspaceFolder}/venv/bin/python manage.py runserver",
+      "options": {
+        "cwd": "${workspaceFolder}/backend"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": false
+      },
+      "problemMatcher": [],
+      "group": "none"
+    },
+    {
+      "label": "Backend — Django (Windows)",
+      "type": "shell",
+      "command": "${workspaceFolder}\\venv\\Scripts\\python.exe manage.py runserver",
+      "options": {
+        "cwd": "${workspaceFolder}\\backend"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": false
+      },
+      "problemMatcher": [],
+      "group": "none"
+    },
+    {
+      "label": "Frontend — Vite",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": {
+        "cwd": "${workspaceFolder}/frontend"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": false
+      },
+      "problemMatcher": [],
+      "group": "none"
+    },
+    {
+      "label": "Full stack — macOS / Linux",
+      "dependsOrder": "parallel",
+      "dependsOn": ["Backend — Django (macOS / Linux)", "Frontend — Vite"],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "showReuseMessage": false
+      },
+      "problemMatcher": [],
+      "group": "none"
+    },
+    {
+      "label": "Full stack — Windows",
+      "dependsOrder": "parallel",
+      "dependsOn": ["Backend — Django (Windows)", "Frontend — Vite"],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "showReuseMessage": false
+      },
+      "problemMatcher": [],
+      "group": "none"
+    }
+  ]
+}
