@@ -1,0 +1,141 @@
+/* Mobile-only rules; palette comes from index.css, base layout from layout.css.
+ * Breakpoint matches PROJECTS_NARROW_MEDIA in data/projectsCarousel.ts. */
+
+@media (max-width: 1024px) {
+  html {
+    font-size: 16px;
+  }
+
+  /* Narrow breakpoint: theme + menu buttons in a cluster. */
+  .site-nav__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  /* Same chrome for hamburger menu button. */
+  .site-nav__menu-btn {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--bg) 90%, var(--highlight));
+    color: var(--highlight);
+    cursor: pointer;
+    transition:
+      background 0.2s,
+      border-color 0.2s,
+      color 0.2s;
+  }
+
+  .site-nav__menu-btn:hover {
+    border-color: var(--highlight);
+    background: var(--social-bg);
+    color: var(--text-h);
+  }
+
+  /* Floating dropdown anchored to the menu button; out of flow. */
+  .site-nav__mobile-wrap {
+    position: absolute;
+    top: calc(var(--nav-h) - 0.25rem);
+    right: var(--page-pad);
+    z-index: 30;
+    width: min(14rem, calc(100vw - 2 * var(--page-pad)));
+    padding: 0;
+  }
+
+  .site-nav__mobile-wrap[hidden] {
+    display: none !important;
+  }
+
+  /* Opaque card surface so theme tokens read correctly. */
+  .site-nav__panel {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.5rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+  }
+
+  .site-nav__link--stacked {
+    display: block;
+    padding: 0.6rem 0.75rem;
+    border-radius: 6px;
+    font-size: 1rem;
+  }
+
+  .site-nav__link--stacked:hover {
+    background: var(--surface-hover);
+  }
+
+  /* Full-viewport click-catcher (portaled to document.body so the viewport is the containing block). */
+  .site-nav__backdrop {
+    position: fixed;
+    inset: 0;
+    /* Below .site-nav (20) so the sticky header and mobile panel stay interactive. */
+    z-index: 19;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .projects__carousel--mobile {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .projects__nav-btn--mobile {
+    width: 100%;
+    min-height: 2.75rem;
+    height: auto;
+  }
+
+  .projects__carousel--mobile .projects__grid {
+    flex: 1 1 auto;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .projects__grid--mobile {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  /* Narrow-layout carousel variant. */
+  .project-card--mobile {
+    padding: 1rem 1.1rem;
+    gap: 0;
+    min-height: 0;
+  }
+
+  .project-card--mobile .project-card__title {
+    font-size: 1.05rem;
+    line-height: 1.25;
+  }
+
+  .project-card--mobile .project-card__tags {
+    flex: 1 1 auto;
+    justify-content: flex-start;
+    min-width: 0;
+  }
+
+  .project-card--mobile .project-card__link,
+  .project-card--mobile .project-card__placeholder {
+    flex-shrink: 0;
+    margin-top: 0;
+  }
+}
