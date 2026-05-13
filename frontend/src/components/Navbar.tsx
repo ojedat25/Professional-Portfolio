@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import type { MouseEvent } from "react";
+import { createPortal } from "react-dom";
 import { Menu, Monitor, Moon, Sun, X } from "lucide-react";
 import { useTheme, type ThemePreference } from "../hooks/useTheme";
 import { useIsNarrowProjects } from "../hooks/useMediaQuery";
@@ -74,9 +75,7 @@ function ThemeCycleButton() {
       {iconElement}
       <span className="site-nav__theme-text" aria-hidden="true">
         <span className="site-nav__theme-label">{themeLabelText}</span>
-        <span className="site-nav__theme-mode">
-          {themeModeText}
-        </span>
+        <span className="site-nav__theme-mode">{themeModeText}</span>
       </span>
     </button>
   );
@@ -161,14 +160,17 @@ function NavbarNarrow() {
           </a>
         </nav>
       </div>
-      {menuOpen ? (
-        <button
-          type="button"
-          className="site-nav__backdrop"
-          aria-label="Close menu"
-          onClick={() => setMenuOpen(false)}
-        />
-      ) : null}
+      {menuOpen
+        ? createPortal(
+            <button
+              type="button"
+              className="site-nav__backdrop"
+              aria-label="Close menu"
+              onClick={() => setMenuOpen(false)}
+            />,
+            document.body,
+          )
+        : null}
     </>
   );
 }

@@ -77,11 +77,12 @@
   background: var(--surface-hover);
 }
 
-/* Invisible click-catcher behind the dropdown; outside click closes menu. */
+/* Full-viewport click-catcher (portaled under .site-nav so header blur is not its containing block). */
 .site-nav__backdrop {
   position: fixed;
   inset: 0;
-  z-index: 25;
+  /* Below .site-nav (20) so the sticky header and mobile panel stay interactive. */
+  z-index: 19;
   margin: 0;
   padding: 0;
   border: 0;
