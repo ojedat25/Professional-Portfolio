@@ -1,6 +1,6 @@
 export const PROJECTS_PAGE_SIZE = 3;
 
-/** Matches carousel layout CSS ([`layout.css`]) and [`useIsNarrowProjects`]. */
+/** Matches carousel layout CSS ([`mobile.css`]) and [`useIsNarrowProjects`]. */
 export const PROJECTS_NARROW_MEDIA = "(max-width: 960px)";
 
 export type ProjectCarouselBounds = {

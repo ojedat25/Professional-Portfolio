@@ -1,4 +1,4 @@
-/* Layout-only; palette comes from index.css (--bg, etc. on html[data-theme]). */
+/* Layout-only; palette comes from index.css, mobile-only rules live in mobile.css. */
 
 /* Centered column with responsive side padding and max width. */
 .layout-inner {
@@ -72,14 +72,6 @@
   gap: 1rem;
 }
 
-/* Narrow breakpoint: theme + menu buttons in a cluster. */
-.site-nav__actions {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex-shrink: 0;
-}
-
 /* Wide breakpoint: anchor links grouped with theme control. */
 .site-nav__end {
   display: flex;
@@ -110,32 +102,6 @@
 
 .site-nav__link:hover {
   color: var(--highlight);
-}
-
-/* Same chrome for hamburger menu button. */
-.site-nav__menu-btn {
-  flex-shrink: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.75rem;
-  height: 2.75rem;
-  padding: 0;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: color-mix(in srgb, var(--bg) 90%, var(--highlight));
-  color: var(--highlight);
-  cursor: pointer;
-  transition:
-    background 0.2s,
-    border-color 0.2s,
-    color 0.2s;
-}
-
-.site-nav__menu-btn:hover {
-  border-color: var(--highlight);
-  background: var(--social-bg);
-  color: var(--text-h);
 }
 
 /* Pill button: icon plus a readable label/mode inside one hit target. */
@@ -183,51 +149,6 @@
   font-weight: 600;
   letter-spacing: 0.02em;
   color: var(--text-h);
-}
-
-/* Expandable drawer content below bar on small screens. */
-.site-nav__mobile-wrap {
-  position: relative;
-  z-index: 2;
-  padding-bottom: 0.5rem;
-}
-
-.site-nav__mobile-wrap[hidden] {
-  display: none !important;
-}
-
-/* Vertical anchor list when menu is open. */
-.site-nav__panel {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  padding: 0.75rem 0 0.5rem;
-  margin-top: 0.25rem;
-  border-top: 1px solid var(--border);
-}
-
-.site-nav__link--stacked {
-  display: block;
-  padding: 0.65rem 0.35rem;
-  border-radius: 6px;
-  font-size: 1rem;
-}
-
-.site-nav__link--stacked:hover {
-  background: var(--surface-hover);
-}
-
-/* Dims page behind expanded mobile panel; click closes menu. */
-.site-nav__backdrop {
-  position: fixed;
-  inset: 0;
-  /* Below inner row and panel so bar controls stay clickable. */
-  z-index: 1;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  cursor: pointer;
-  background: var(--backdrop-scrim);
 }
 
 .hero__inner {
@@ -309,12 +230,6 @@
   align-items: center;
 }
 
-.projects__carousel--mobile {
-  flex-direction: column;
-  align-items: stretch;
-  gap: 0.75rem;
-}
-
 /* Prev/next; matches nav icon button look. */
 .projects__nav-btn {
   flex-shrink: 0;
@@ -347,18 +262,6 @@
   cursor: not-allowed;
 }
 
-.projects__nav-btn--mobile {
-  width: 100%;
-  min-height: 2.75rem;
-  height: auto;
-}
-
-.projects__carousel--mobile .projects__grid {
-  flex: 1 1 auto;
-  min-width: 0;
-  width: 100%;
-}
-
 /* Default fluid grid when not constrained by carousel slot. */
 .projects__grid {
   display: grid;
@@ -374,13 +277,6 @@
 /* Exactly three tiles in desktop carousel. */
 .projects__grid--carousel {
   grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.projects__grid--mobile {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: 1fr;
-  width: 100%;
 }
 
 /* Skill groups; switches to three columns from 900px. */
@@ -452,23 +348,11 @@
   margin-top: 0.25rem;
 }
 
-/* Narrow-layout carousel variant. */
-.project-card--mobile {
-  padding: 1rem 1.1rem;
-  gap: 0;
-  min-height: 0;
-}
-
 .project-card__body {
   display: flex;
   flex-direction: column;
   gap: 0.45rem;
   min-width: 0;
-}
-
-.project-card--mobile .project-card__title {
-  font-size: 1.05rem;
-  line-height: 1.25;
 }
 
 .project-card__desc--clamp {
@@ -491,18 +375,6 @@
   margin-top: 0.75rem;
   padding-top: 0.65rem;
   border-top: 1px solid var(--border);
-}
-
-.project-card--mobile .project-card__tags {
-  flex: 1 1 auto;
-  justify-content: flex-start;
-  min-width: 0;
-}
-
-.project-card--mobile .project-card__link,
-.project-card--mobile .project-card__placeholder {
-  flex-shrink: 0;
-  margin-top: 0;
 }
 
 .project-card__desc {
@@ -668,9 +540,4 @@
 .site-nav__menu-btn:focus-visible,
 .site-nav__theme-btn:focus-visible {
   outline-offset: 3px;
-}
-
-.site-nav__backdrop:focus-visible {
-  outline: 2px solid var(--highlight);
-  outline-offset: 2px;
 }
