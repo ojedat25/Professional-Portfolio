@@ -27,9 +27,12 @@ def get_github_repos(username):
     return filtered_data
 
 def filter_github_repos(repos):
+    # Filter repos that contain "portfolio" in the topics and replace hyphens with spaces in the name
     filtered_repos = [repo for repo in repos if "portfolio" in repo.get("topics", [])]
     for repo in filtered_repos:
         repo_tags = repo.get("topics", [])
         if "portfolio" in repo_tags:
             repo["topics"].remove("portfolio")
+        repo_name = repo.get("name", "")
+        repo["name"] = repo_name.replace("-", " ")
     return filtered_repos
