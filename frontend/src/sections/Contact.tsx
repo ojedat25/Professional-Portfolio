@@ -36,7 +36,7 @@ export default function Contact() {
   const [submitState, setSubmitState] = useState<SubmitState>("idle");
   const [submitError, setSubmitError] = useState("");
 
-  const telHref = `tel:${siteContent.phone.replace(/\s/g, "")}`;
+  const telHref = `tel:${siteContent.phone.replace(/[^\\d+]/g, "")}`;
 
   async function handleSubmit(formEvent: SubmitEvent<HTMLFormElement>) {
     formEvent.preventDefault();
