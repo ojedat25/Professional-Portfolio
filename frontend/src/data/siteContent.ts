@@ -14,6 +14,7 @@ export type SkillsBlock = {
 
 export type SiteContent = {
   email: string;
+  phone: string;
   githubUrl: string;
   linkedinUrl: string;
   resumeUrl: string;
@@ -31,6 +32,7 @@ export type SiteContent = {
  */
 export const siteContent: SiteContent = {
   email: "toniojeda2015@gmail.com",
+  phone: "+1 (612) 434-9013",
   githubUrl: "https://github.com/ojedat25",
   linkedinUrl: "https://www.linkedin.com/in/ojedat20/",
   resumeUrl,

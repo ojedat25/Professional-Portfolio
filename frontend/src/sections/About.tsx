@@ -1,20 +1,4 @@
-import type { AnchorHTMLAttributes } from "react";
 import { siteContent } from "../data/siteContent";
-
-function outboundProps(
-  href: string,
-): Pick<AnchorHTMLAttributes<HTMLAnchorElement>, "target" | "rel"> {
-  if (!href || href === "#") {
-    return {};
-  }
-  if (/^mailto:/i.test(href)) {
-    return {};
-  }
-  if (/^https?:\/\//i.test(href)) {
-    return { target: "_blank", rel: "noopener noreferrer" };
-  }
-  return { target: "_blank", rel: "noopener noreferrer" };
-}
 
 export default function About() {
   return (
@@ -22,8 +6,7 @@ export default function About() {
       <p id="about-label" className="section-label">
         About
       </p>
-      <div className="about__grid">
-        <div className="about__main">
+      <div className="about__main">
           <p className="about__bio">{siteContent.bio}</p>
           {siteContent.aboutExtra.map((para) => (
             <p key={para} className="about__bio about__bio--secondary">
@@ -50,35 +33,14 @@ export default function About() {
               ))}
             </ul>
           </div>
-        </div>
-        <div className="about__contact">
-          <h2 className="about__cta-heading">Let&apos;s talk</h2>
-          <ul className="about__links">
-            <li>
-              <a className="about__link" href={`mailto:${siteContent.email}`}>
-                {siteContent.email}
-              </a>
-            </li>
-            <li>
-              <a
-                className="about__link"
-                href={siteContent.linkedinUrl}
-                {...outboundProps(siteContent.linkedinUrl)}
-              >
-                LinkedIn <span aria-hidden="true">↗</span>
-              </a>
-            </li>
-            <li>
-              <a
-                className="about__link"
-                href={siteContent.resumeUrl}
-                {...outboundProps(siteContent.resumeUrl)}
-              >
-                Resume <span aria-hidden="true">↗</span>
-              </a>
-            </li>
-          </ul>
-        </div>
+          <a
+            className="about__link"
+            href={siteContent.resumeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Resume <span aria-hidden="true">↗</span>
+          </a>
       </div>
     </div>
   );

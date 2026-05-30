@@ -1,0 +1,90 @@
+import html
+import json
+
+import resend
+from django.conf import settings
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+
+
+def _parse_json_body(request):
+    try:
+        payload = json.loads(request.body.decode("utf-8"))
+    except (json.JSONDecodeError, UnicodeDecodeError):
+        return None
+    if not isinstance(payload, dict):
+        return None
+    return payload
+
+
+def _strip_optional_string(payload, field_name):
+    value = payload.get(field_name)
+    if value is None:
+        return ""
+    if not isinstance(value, str):
+        return None
+    return value.strip()
+
+
+@csrf_exempt
+@require_POST
+def submit_contact(request):
+    payload = _parse_json_body(request)
+    if payload is None:
+        return JsonResponse({"error": "Invalid JSON body"}, status=400)
+
+    message = _strip_optional_string(payload, "message")
+    if message is None or not message:
+        return JsonResponse({"error": "Message is required"}, status=400)
+
+    email = _strip_optional_string(payload, "email")
+    if email is None:
+        return JsonResponse({"error": "Invalid email field"}, status=400)
+
+    phone = _strip_optional_string(payload, "phone")
+    if phone is None:
+        return JsonResponse({"error": "Invalid phone field"}, status=400)
+
+    if not email and not phone:
+        return JsonResponse(
+            {"error": "Provide an email or phone number"},
+            status=400,
+        )
+
+    if not settings.RESEND_API_KEY:
+        return JsonResponse(
+            {"error": "Email service is not configured"},
+            status=502,
+        )
+
+    email_line = html.escape(email or "(not provided)")
+    phone_line = html.escape(phone or "(not provided)")
+    message_line = html.escape(message)
+    html_body = (
+        "<p><strong>Email:</strong> "
+        f"{email_line}</p>"
+        "<p><strong>Phone:</strong> "
+        f"{phone_line}</p>"
+        "<p><strong>Message:</strong></p>"
+        f"<p>{message_line}</p>"
+    )
+
+    resend.api_key = settings.RESEND_API_KEY
+
+    try:
+        resend.Emails.send(
+            {
+                "from": settings.RESEND_FROM_EMAIL,
+                "to": [settings.CONTACT_RECIPIENT_EMAIL],
+                "subject": "Portfolio contact form",
+                "html": html_body,
+            }
+        )
+    except Exception:
+        return JsonResponse(
+            {"error": "Failed to send message. Please try again later."},
+            status=502,
+        )
+
+    return JsonResponse({"status": "sent"})

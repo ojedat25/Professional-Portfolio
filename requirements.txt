@@ -20,6 +20,7 @@ platformdirs==4.9.6
 PyJWT==2.12.1
 pytokens==0.4.1
 requests==2.33.1
+resend==2.19.0
 ruff==0.15.12
 sqlparse==0.5.5
 stripe==15.1.0

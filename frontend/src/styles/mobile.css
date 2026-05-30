@@ -138,4 +138,8 @@
     flex-shrink: 0;
     margin-top: 0;
   }
+
+  .contact__grid {
+    grid-template-columns: 1fr;
+  }
 }

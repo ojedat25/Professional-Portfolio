@@ -3,3 +3,5 @@ export { apiRequest } from "./client";
 export { ApiError } from "./errors";
 export { fetchGithubRepos } from "./github";
 export type { GithubRepo } from "./github";
+export { submitContact } from "./contact";
+export type { ContactPayload, ContactSuccess } from "./contact";
