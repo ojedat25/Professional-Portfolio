@@ -67,7 +67,7 @@ def submit_contact(request):
         "<p><strong>Phone:</strong> "
         f"{phone_line}</p>"
         "<p><strong>Message:</strong></p>"
-        f"<p>{message_line}</p>"
+        f"<p style=\"white-space: pre-wrap;\">{message_line}</p>"
     )
 
     resend.api_key = settings.RESEND_API_KEY
