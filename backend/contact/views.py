@@ -37,6 +37,8 @@ def submit_contact(request):
     message = _strip_optional_string(payload, "message")
     if message is None or not message:
         return JsonResponse({"error": "Message is required"}, status=400)
+    if len(message) > 10000:
+        return JsonResponse({"error": "Message is too long (max 10,000 characters)"}, status=400)
 
     email = _strip_optional_string(payload, "email")
     if email is None:
