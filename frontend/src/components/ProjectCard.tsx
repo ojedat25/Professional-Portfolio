@@ -1,10 +1,11 @@
-import { useRevealOnScroll } from "../hooks/useRevealOnScroll";
+import { PROJECT_CARD_ENTRANCE_STAGGER_MS } from "../data/projectsCarousel";
 
 export type ProjectCardProps = {
   title: string;
   description: string;
   tags: string[];
   href: string;
+  entranceIndex?: number;
 };
 
 export default function ProjectCard({
@@ -12,14 +13,19 @@ export default function ProjectCard({
   description,
   tags,
   href,
+  entranceIndex = 0,
 }: ProjectCardProps) {
   const tagList = Array.isArray(tags) ? tags : [];
   const external = typeof href === "string" && /^https?:\/\//i.test(href); // http(s) opens new tab; same-repo paths stay in-tab.
   const isPlaceholder = !href || href === "#"; // No public demo URL yet — show resume fallback instead of dead link.
-  const revealRef = useRevealOnScroll<HTMLElement>();
 
   return (
-    <article ref={revealRef} className="project-card reveal">
+    <article
+      className="project-card animate-fade-slide-up"
+      style={{
+        animationDelay: `${entranceIndex * PROJECT_CARD_ENTRANCE_STAGGER_MS}ms`,
+      }}
+    >
       <h3 className="project-card__title">{title}</h3>
       <p className="project-card__desc">{description}</p>
       {tagList.length > 0 ? (

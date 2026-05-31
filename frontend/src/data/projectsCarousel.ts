@@ -1,6 +1,9 @@
 /** Cards visible per carousel page. */
 export const PROJECTS_PAGE_SIZE = 3;
 
+/** Stagger between project card entrance animations (ms). */
+export const PROJECT_CARD_ENTRANCE_STAGGER_MS = 100;
+
 /** Same breakpoint as `html` rules in [`mobile.css`]; drives [`useIsNarrowProjects`]. */
 export const PROJECTS_NARROW_MEDIA = "(max-width: 1024px)";
 
