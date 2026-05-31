@@ -59,6 +59,10 @@ def submit_contact(request):
     if phone is None:
         return JsonResponse({"error": "Invalid phone field"}, status=400)
 
+    name = _strip_optional_string(payload, "name")
+    if name is None:
+        return JsonResponse({"error": "Invalid name field"}, status=400)
+
     if not email and not phone:
         return JsonResponse(
             {"error": "Provide an email or phone number"},
@@ -85,15 +89,23 @@ def submit_contact(request):
 
     resend.api_key = settings.RESEND_API_KEY
 
+    safe_name = name.replace("\r", "").replace("\n", "")
+    if safe_name:
+        from_field = f"{safe_name} via Portfolio <{settings.RESEND_FROM_EMAIL}>"
+    else:
+        from_field = settings.RESEND_FROM_EMAIL
+
+    email_params = {
+        "from": from_field,
+        "to": [settings.CONTACT_RECIPIENT_EMAIL],
+        "subject": "Portfolio contact form",
+        "html": html_body,
+    }
+    if email:
+        email_params["reply_to"] = email
+
     try:
-        resend.Emails.send(
-            {
-                "from": settings.RESEND_FROM_EMAIL,
-                "to": [settings.CONTACT_RECIPIENT_EMAIL],
-                "subject": "Portfolio contact form",
-                "html": html_body,
-            }
-        )
+        resend.Emails.send(email_params)
     except Exception:
         return JsonResponse(
             {"error": "Failed to send message. Please try again later."},

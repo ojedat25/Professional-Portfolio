@@ -31,6 +31,7 @@ function extractApiErrorMessage(err: ApiError): string {
 }
 
 export default function Contact() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
@@ -45,6 +46,7 @@ export default function Contact() {
     setErrors({});
     setSubmitError("");
 
+    const trimmedName = name.trim();
     const trimmedEmail = email.trim();
     const trimmedPhone = phone.trim();
     const trimmedMessage = message.trim();
@@ -79,6 +81,7 @@ export default function Contact() {
 
     try {
       await submitContact({
+        name: trimmedName,
         message: trimmedMessage,
         ...(trimmedEmail ? { email: trimmedEmail } : {}),
         ...(trimmedPhone ? { phone: trimmedPhone } : {}),
@@ -119,6 +122,24 @@ export default function Contact() {
               ) : null}
               <form className="contact__form" onSubmit={handleSubmit} noValidate>
                 <div className="contact__field">
+                  <label className="contact__label" htmlFor="contact-name">
+                    Name
+                  </label>
+                  <input
+                    id="contact-name"
+                    className="contact__input"
+                    type="text"
+                    name="name"
+                    autoComplete="name"
+                    placeholder="Your name"
+                    value={name}
+                    onChange={(changeEvent) =>
+                      setName(changeEvent.target.value)
+                    }
+                    disabled={submitState === "submitting"}
+                  />
+                </div>
+                <div className="contact__field">
                   <label className="contact__label" htmlFor="contact-email">
                     Email
                   </label>
@@ -128,6 +149,7 @@ export default function Contact() {
                     type="email"
                     name="email"
                     autoComplete="email"
+                    placeholder="you@example.com"
                     value={email}
                     onChange={(changeEvent) =>
                       setEmail(changeEvent.target.value)
@@ -154,6 +176,7 @@ export default function Contact() {
                     type="tel"
                     name="phone"
                     autoComplete="tel"
+                    placeholder="(555) 123-4567"
                     value={phone}
                     onChange={(changeEvent) =>
                       setPhone(changeEvent.target.value)
