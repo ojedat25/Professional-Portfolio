@@ -41,6 +41,9 @@ def _strip_optional_string(payload, field_name):
     error_message="Too many submissions. Please try again later.",
 )
 def submit_contact(request):
+    if request.content_type != "application/json":
+        return JsonResponse({"error": "Unsupported Media Type"}, status=415)
+
     payload = _parse_json_body(request)
     if payload is None:
         return JsonResponse({"error": "Invalid JSON body"}, status=400)
