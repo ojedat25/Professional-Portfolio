@@ -7,6 +7,11 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
+from portfolio.rate_limit import rate_limit
+
+CONTACT_RATE_LIMIT_MAX = 5
+CONTACT_RATE_LIMIT_WINDOW = 3600
+
 
 def _parse_json_body(request):
     try:
@@ -29,6 +34,12 @@ def _strip_optional_string(payload, field_name):
 
 @csrf_exempt
 @require_POST
+@rate_limit(
+    key_prefix="contact",
+    max_requests=CONTACT_RATE_LIMIT_MAX,
+    window_seconds=CONTACT_RATE_LIMIT_WINDOW,
+    error_message="Too many submissions. Please try again later.",
+)
 def submit_contact(request):
     payload = _parse_json_body(request)
     if payload is None:

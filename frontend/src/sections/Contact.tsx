@@ -16,6 +16,19 @@ type FieldErrors = {
 type SubmitState = "idle" | "submitting" | "success" | "error";
 
 function extractApiErrorMessage(err: ApiError): string {
+  if (err.status === 429) {
+    const body = err.body;
+    if (
+      body &&
+      typeof body === "object" &&
+      "error" in body &&
+      typeof (body as { error: unknown }).error === "string"
+    ) {
+      return (body as { error: string }).error;
+    }
+    return "Too many submissions. Please try again later.";
+  }
+
   const body = err.body;
   if (
     body &&
