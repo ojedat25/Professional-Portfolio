@@ -12,8 +12,8 @@ export default function ProjectCard({
   href,
 }: ProjectCardProps) {
   const tagList = Array.isArray(tags) ? tags : [];
-  const external = typeof href === "string" && /^https?:\/\//i.test(href);
-  const isPlaceholder = !href || href === "#";
+  const external = typeof href === "string" && /^https?:\/\//i.test(href); // http(s) opens new tab; same-repo paths stay in-tab.
+  const isPlaceholder = !href || href === "#"; // No public demo URL yet — show resume fallback instead of dead link.
 
   return (
     <article className="project-card">

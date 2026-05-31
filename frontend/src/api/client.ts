@@ -5,7 +5,7 @@ type RequestOptions = Omit<RequestInit, "body"> & {
   body?: unknown;
 };
 
-/** Typed JSON fetch wrapper. Resolves with parsed JSON, throws `ApiError` on non-2xx. */
+/** Joins API_BASE_URL, sets JSON headers, parses bodies safely, throws ApiError with status + payload. */
 export async function apiRequest<T>(
   path: string,
   options: RequestOptions = {},
@@ -37,6 +37,7 @@ export async function apiRequest<T>(
   return payload as T;
 }
 
+// Non-JSON error bodies (HTML/plain text) should not crash the client.
 function safeJsonParse(text: string): unknown {
   try {
     return JSON.parse(text);

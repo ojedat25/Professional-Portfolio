@@ -1,3 +1,4 @@
+/* Static copy for Hero, About, Skills, Contact links — not fetched from the API; edit when resume or contact info changes. */
 import resumeUrl from "../assets/resume.pdf?url";
 
 export type ExperienceHighlight = {
@@ -27,9 +28,6 @@ export type SiteContent = {
   skills: SkillsBlock;
 };
 
-/**
- * Site copy aligned with resume. Update links when you publish repos or demos.
- */
 export const siteContent: SiteContent = {
   email: "toniojeda2015@gmail.com",
   phone: "+1 (612) 434-9013",

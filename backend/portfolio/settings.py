@@ -156,13 +156,13 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 CORS_ALLOWED_ORIGINS = env("CORS_ALLOWED_ORIGINS", default=["http://localhost:5173"])
 
-ADMIN_PASSWORD_HASH = env("ADMIN_PASSWORD_HASH", default=None)
+ADMIN_PASSWORD_HASH = env("ADMIN_PASSWORD_HASH", default=None)  # Reserved for future admin auth; not wired yet.
 
 GITHUB_TOKEN = env("GITHUB_TOKEN", default=None)
 
-RESEND_API_KEY = env("RESEND_API_KEY", default="")
-RESEND_FROM_EMAIL = env("RESEND_FROM_EMAIL", default="onboarding@resend.dev")
+RESEND_API_KEY = env("RESEND_API_KEY", default="")  # Required for contact form email delivery.
+RESEND_FROM_EMAIL = env("RESEND_FROM_EMAIL", default="onboarding@resend.dev")  # Verified sender domain in Resend.
 CONTACT_RECIPIENT_EMAIL = env(
     "CONTACT_RECIPIENT_EMAIL",
     default="toniojeda2015@gmail.com",
-)
+)  # Inbox where form submissions are delivered.

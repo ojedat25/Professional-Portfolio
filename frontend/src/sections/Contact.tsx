@@ -53,6 +53,7 @@ export default function Contact() {
     const nextErrors: FieldErrors = {};
 
     if (!trimmedEmail && !trimmedPhone) {
+      // At least one contact field required so there is a way to reply; each field optional on its own.
       const contactHint = "Provide an email or phone number";
       nextErrors.email = contactHint;
       nextErrors.phone = contactHint;
@@ -107,6 +108,7 @@ export default function Contact() {
       <div className="contact__grid">
         <div className="contact__form-col">
           {submitState === "success" ? (
+            /* Form swaps for confirmation on success; fields stay in state but form unmounts (no resubmit). */
             <div className="contact__success" role="status">
               <p className="contact__success-heading">Message sent</p>
               <p className="contact__success-text">
@@ -121,6 +123,7 @@ export default function Contact() {
                 </p>
               ) : null}
               <form className="contact__form" onSubmit={handleSubmit} noValidate>
+                {/* noValidate: browser validation off; messages controlled in submit handler. */}
                 <div className="contact__field">
                   <label className="contact__label" htmlFor="contact-name">
                     Name

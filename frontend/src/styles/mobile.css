@@ -1,5 +1,4 @@
-/* Mobile-only rules; palette comes from index.css, base layout from layout.css.
- * Breakpoint matches PROJECTS_NARROW_MEDIA in data/projectsCarousel.ts. */
+/* max-width: 1024px overrides — keep in sync with PROJECTS_NARROW_MEDIA in projectsCarousel.ts. */
 
 @media (max-width: 1024px) {
   html {

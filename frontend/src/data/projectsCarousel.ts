@@ -1,3 +1,4 @@
+/** Cards visible per carousel page. */
 export const PROJECTS_PAGE_SIZE = 3;
 
 /** Same breakpoint as `html` rules in [`mobile.css`]; drives [`useIsNarrowProjects`]. */
@@ -8,6 +9,7 @@ export type ProjectCarouselBounds = {
   maxStart: number;
 };
 
+/* When count ≤ page size, hide nav and show all; otherwise compute last valid startIndex. */
 export function getProjectCarouselBounds(
   projectsLength: number,
 ): ProjectCarouselBounds {
@@ -16,6 +18,7 @@ export function getProjectCarouselBounds(
   return { showNav, maxStart };
 }
 
+/* Slice window for current page, or return full list when nav is hidden. */
 export function visibleProjectPage<T>(
   items: T[],
   startIndex: number,

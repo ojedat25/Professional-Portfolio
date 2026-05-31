@@ -1,4 +1,4 @@
-/* Layout-only; palette comes from index.css, mobile-only rules live in mobile.css. */
+/* Desktop layout: sections, navbar, hero, projects carousel, contact — palette from index.css. */
 
 /* Centered column with responsive side padding and max width. */
 .layout-inner {

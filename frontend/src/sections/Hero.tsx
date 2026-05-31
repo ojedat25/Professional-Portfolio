@@ -2,6 +2,7 @@ import type { MouseEvent } from "react";
 import { siteContent } from "../data/siteContent";
 
 function scrollToWork(event: MouseEvent<HTMLAnchorElement>) {
+  // preventDefault + scrollIntoView for smooth scroll; replaceState updates hash without reload jump.
   event.preventDefault();
   const el = document.getElementById("work");
   if (el) {

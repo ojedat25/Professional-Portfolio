@@ -2,7 +2,7 @@ from rest_framework import serializers
 
 
 class GitHubRepoSerializer(serializers.Serializer):
-    """Slim, frontend-friendly shape for a GitHub repo from /users/{user}/repos."""
+    """Maps GitHub API repo objects to frontend GithubRepo; id/title from name (post-filter rename), href from html_url."""
 
     id = serializers.CharField(source="name")
     title = serializers.CharField(source="name")

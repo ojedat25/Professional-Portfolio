@@ -5,6 +5,7 @@ from django.http import JsonResponse
 
 
 def get_client_ip(request) -> str:
+    # Render sets CF-Connecting-IP at the edge; X-Forwarded-For[0] is client-spoofable.
     cf_ip = request.META.get("HTTP_CF_CONNECTING_IP")
     if cf_ip:
         return cf_ip.strip()
@@ -28,12 +29,14 @@ def is_rate_limited(
         return False
 
     cache_key = f"rate:{key_prefix}:{ip}"
+    # add sets the window TTL on first hit; incr counts later hits in the same window.
     if cache.add(cache_key, 1, timeout=window_seconds):
         count = 1
     else:
         try:
             count = cache.incr(cache_key)
         except ValueError:
+            # Key can expire between add and incr under concurrent requests.
             cache.add(cache_key, 1, timeout=window_seconds)
             count = 1
 
@@ -47,6 +50,7 @@ def rate_limit(
     window_seconds: int,
     error_message: str = "Too many requests. Please try again later.",
 ):
+    # Shared 429 JSON wrapper so views declare limits via constants, not boilerplate.
     def decorator(view_func):
         @functools.wraps(view_func)
         def wrapper(request, *args, **kwargs):

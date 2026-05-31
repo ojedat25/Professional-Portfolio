@@ -6,7 +6,8 @@ function getMql(): MediaQueryList {
 }
 
 /**
- * True when viewport matches narrow projects layout (single column, mobile carousel).
+ * useSyncExternalStore avoids hydration mismatch and post-paint layout snap from useState + useEffect.
+ * Third argument () => false: SSR/first render assumes desktop until the client subscribes.
  */
 export function useIsNarrowProjects(): boolean {
   return useSyncExternalStore(

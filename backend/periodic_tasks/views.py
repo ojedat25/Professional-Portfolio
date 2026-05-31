@@ -7,4 +7,5 @@ from rest_framework.decorators import permission_classes
 
 @require_GET
 def ping(request):
+    # Render healthCheckPath in render.yaml — keeps the free-tier service from sleeping.
     return JsonResponse({"status": "ok"})

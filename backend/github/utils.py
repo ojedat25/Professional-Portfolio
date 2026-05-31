@@ -8,6 +8,8 @@ GITHUB_HEADERS_BASE = {"Accept": "application/vnd.github+json"}
 
 
 def get_github_repos(username):
+    # Token uses /user/repos (private + public); without it, only public /users/{username}/repos.
+    # Auth and public responses are cached separately for one hour to cut GitHub rate limits.
     token = settings.GITHUB_TOKEN
     if token:
         cache_key = "github_repos:auth"
@@ -54,6 +56,7 @@ def get_github_repos(username):
 
 
 def filter_github_repos(repos):
+    # Only repos tagged "portfolio" on GitHub; strip that tag and hyphenate names for card titles.
     filtered_repos = [repo for repo in repos if "portfolio" in repo.get("topics", [])]
     for repo in filtered_repos:
         repo["topics"].remove("portfolio")

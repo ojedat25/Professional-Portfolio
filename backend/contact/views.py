@@ -32,9 +32,9 @@ def _strip_optional_string(payload, field_name):
     return value.strip()
 
 
-@csrf_exempt
+@csrf_exempt  # SPA POSTs JSON without a Django CSRF cookie.
 @require_POST
-@rate_limit(
+@rate_limit(  # IP-based throttle; limits live in CONTACT_RATE_LIMIT_* constants.
     key_prefix="contact",
     max_requests=CONTACT_RATE_LIMIT_MAX,
     window_seconds=CONTACT_RATE_LIMIT_WINDOW,
@@ -66,6 +66,7 @@ def submit_contact(request):
     if name is None:
         return JsonResponse({"error": "Invalid name field"}, status=400)
 
+    # Mirror frontend: email and phone are optional individually, but one is required to reply.
     if not email and not phone:
         return JsonResponse(
             {"error": "Provide an email or phone number"},
@@ -94,6 +95,7 @@ def submit_contact(request):
 
     safe_name = name.replace("\r", "").replace("\n", "")
     if safe_name:
+        # Show the visitor's name in the inbox while still sending from the verified domain.
         from_field = f"{safe_name} via Portfolio <{settings.RESEND_FROM_EMAIL}>"
     else:
         from_field = settings.RESEND_FROM_EMAIL
@@ -105,6 +107,7 @@ def submit_contact(request):
         "html": html_body,
     }
     if email:
+        # Only set reply_to when the visitor gave an email so Resend "Reply" reaches them.
         email_params["reply_to"] = email
 
     try:

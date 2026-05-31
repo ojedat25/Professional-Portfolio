@@ -6,7 +6,7 @@ export type GithubReposState =
   | { status: "success"; data: GithubRepo[] }
   | { status: "error"; error: Error };
 
-/** Loads portfolio-tagged GitHub repos from the Django backend on mount. */
+/** Discriminated union: loading on mount, success when fetch resolves, error on failure. */
 export function useGithubRepos(): GithubReposState {
   const [state, setState] = useState<GithubReposState>({ status: "loading" });
 
@@ -23,6 +23,7 @@ export function useGithubRepos(): GithubReposState {
         });
       });
 
+    /* Strict mode / fast navigation: don't update state after unmount. */
     return () => controller.abort();
   }, []);
 

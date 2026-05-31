@@ -9,7 +9,7 @@ export type ContactPayload = {
 
 export type ContactSuccess = { status: "sent" };
 
-/** Submit the portfolio contact form to the Django backend. */
+/** POSTs JSON to /api/contact/ (Django + Resend); failures throw ApiError for the form handler. */
 export async function submitContact(
   payload: ContactPayload,
 ): Promise<ContactSuccess> {

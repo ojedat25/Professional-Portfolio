@@ -1,4 +1,4 @@
-/* Theme palettes and globals; layout in layout.css, mobile rules in mobile.css. */
+/* Theme palettes (data-theme), CSS variables, typography/reset — imported first from main.tsx. */
 
 /* Font stacks, spacing constants, smoothing, anchor scroll smoothing. */
 html {

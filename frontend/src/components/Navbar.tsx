@@ -6,6 +6,7 @@ import { useTheme, type ThemePreference } from "../hooks/useTheme";
 import { useIsNarrowProjects } from "../hooks/useMediaQuery";
 
 function scrollToSection(id: string) {
+  // Smooth scroll + replaceState updates URL hash without a full navigation jump.
   const targetElement = document.getElementById(id);
   if (targetElement) {
     targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -14,11 +15,12 @@ function scrollToSection(id: string) {
 }
 
 function scrollToId(event: MouseEvent<HTMLAnchorElement>, id: string) {
+  // Desktop links: prevent default # jump, delegate to scrollToSection.
   event.preventDefault();
   scrollToSection(id);
 }
 
-/** Run after the next frame(s) so layout matches the post-commit DOM (e.g. collapsed mobile nav). */
+/** Double rAF waits for mobile menu collapse/layout before scrolling — without it, scroll position is wrong. */
 function scrollToSectionAfterLayout(id: string) {
   requestAnimationFrame(() => {
     requestAnimationFrame(() => scrollToSection(id));
@@ -26,6 +28,7 @@ function scrollToSectionAfterLayout(id: string) {
 }
 
 function scrollToTop(event: MouseEvent<HTMLAnchorElement>) {
+  // Brand link returns to top and clears hash from the URL.
   event.preventDefault();
   window.scrollTo({ top: 0, behavior: "smooth" });
   history.replaceState(null, "", window.location.pathname || "/");
@@ -169,6 +172,7 @@ function NavbarNarrow() {
       </div>
       {menuOpen && typeof document !== "undefined"
         ? createPortal(
+            /* Portal on document.body so backdrop covers full viewport below sticky nav. */
             <div
               className="site-nav__backdrop"
               aria-hidden="true"

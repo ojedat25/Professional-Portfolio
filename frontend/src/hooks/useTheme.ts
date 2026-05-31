@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 
-export const THEME_STORAGE_KEY = "portfolio-theme";
+export const THEME_STORAGE_KEY = "portfolio-theme"; // Must match index.html bootstrap script key.
 
 export type ThemePreference = "system" | "light" | "dark";
 
@@ -40,6 +40,7 @@ function computeResolved(theme: ThemePreference): ResolvedTheme {
 }
 
 export function useTheme() {
+  /* theme = user pick (system included); resolvedTheme = palette applied (OS when system). */
   const [theme, setTheme] = useState<ThemePreference>(() => readStored());
   const [resolvedTheme, setResolvedTheme] = useState<ResolvedTheme>(() =>
     typeof window === "undefined" ? "light" : computeResolved(readStored()),
@@ -80,6 +81,7 @@ export function useTheme() {
     /* One-time sync already ran; no legacy addListener (deprecated in DOM typings). */
   }, [theme]);
 
+  /* Sync if another tab changes THEME_STORAGE_KEY. */
   useEffect(() => {
     function onStorage(storageEvent: StorageEvent) {
       if (
@@ -99,6 +101,7 @@ export function useTheme() {
   }, []);
 
   const cycleTheme = useCallback(() => {
+    // Cycle order: system → light → dark → system.
     setTheme((currentTheme) =>
       currentTheme === "system"
         ? "light"

@@ -11,12 +11,14 @@ type Props = {
   projects: GithubRepo[];
 };
 
+/** Mobile carousel; pagination duplicated from Projects — shared helpers in projectsCarousel.ts. */
 export default function ProjectsMobile({ projects }: Props) {
   const { showNav, maxStart } = getProjectCarouselBounds(projects.length);
   const [startIndex, setStartIndex] = useState(0);
 
   const visible = visibleProjectPage(projects, startIndex, showNav);
 
+  /* Paginate one card at a time; clamp at 0 and maxStart. showNav false when all cards fit one page. */
   function goPrev() {
     setStartIndex((i) => Math.max(0, i - 1));
   }

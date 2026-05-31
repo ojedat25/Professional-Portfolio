@@ -6,6 +6,7 @@ import ProjectCardSkeleton from "../components/skeletons/ProjectCardSkeleton";
 import MobileProjectCardSkeleton from "../components/skeletons/MobileProjectCardSkeleton";
 import { PROJECTS_PAGE_SIZE } from "../data/projectsCarousel";
 
+/* At 1024px, useIsNarrowProjects picks ProjectsMobile vs Projects (same breakpoint as mobile.css). */
 export default function ProjectsSection() {
   const reposState = useGithubRepos();
   const isNarrow = useIsNarrowProjects();
@@ -37,6 +38,7 @@ type ProjectsSkeletonProps = {
 };
 
 function ProjectsSkeleton({ isNarrow }: ProjectsSkeletonProps) {
+  // Mirrors final layout (3 placeholder cards, mobile vs desktop shape) while repos load.
   const Card = isNarrow ? MobileProjectCardSkeleton : ProjectCardSkeleton;
   return (
     <div className={`projects projects--${isNarrow ? "mobile" : "desktop"}`}>
