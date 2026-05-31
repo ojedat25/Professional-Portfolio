@@ -4,7 +4,23 @@ from django.core.cache import cache
 from django.http import JsonResponse
 
 
+def _log_ip_headers(request) -> None:
+    meta = request.META
+    print(
+        "client_ip_debug",
+        {
+            "REMOTE_ADDR": meta.get("REMOTE_ADDR"),
+            "HTTP_X_FORWARDED_FOR": meta.get("HTTP_X_FORWARDED_FOR"),
+            "HTTP_CF_CONNECTING_IP": meta.get("HTTP_CF_CONNECTING_IP"),
+            "HTTP_X_REAL_IP": meta.get("HTTP_X_REAL_IP"),
+            "HTTP_TRUE_CLIENT_IP": meta.get("HTTP_TRUE_CLIENT_IP"),
+        },
+    )
+
+
 def get_client_ip(request) -> str:
+    _log_ip_headers(request)
+
     forwarded = request.META.get("HTTP_X_FORWARDED_FOR")
     if forwarded:
         return forwarded.split(",")[0].strip()
