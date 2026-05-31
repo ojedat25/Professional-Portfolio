@@ -3,6 +3,7 @@ import Hero from "./sections/Hero";
 import ProjectsSection from "./sections/ProjectsSection";
 import Skills from "./sections/Skills";
 import About from "./sections/About";
+import Contact from "./sections/Contact";
 
 export default function App() {
   return (
@@ -35,6 +36,15 @@ export default function App() {
         >
           <div className="layout-inner section__inner">
             <About />
+          </div>
+        </section>
+        <section
+          id="contact"
+          className="section section--contact"
+          aria-labelledby="contact-label"
+        >
+          <div className="layout-inner section__inner">
+            <Contact />
           </div>
         </section>
       </main>

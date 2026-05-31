@@ -158,6 +158,13 @@ function NavbarNarrow() {
           >
             About
           </a>
+          <a
+            className="site-nav__link site-nav__link--stacked"
+            href="#contact"
+            onClick={(mouseEvent) => handleNavClick(mouseEvent, "contact")}
+          >
+            Contact
+          </a>
         </nav>
       </div>
       {menuOpen && typeof document !== "undefined"
@@ -208,6 +215,13 @@ export default function Navbar() {
                 onClick={(mouseEvent) => scrollToId(mouseEvent, "about")}
               >
                 About
+              </a>
+              <a
+                className="site-nav__link"
+                href="#contact"
+                onClick={(mouseEvent) => scrollToId(mouseEvent, "contact")}
+              >
+                Contact
               </a>
             </nav>
             <ThemeCycleButton />
