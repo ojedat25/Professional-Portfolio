@@ -1,3 +1,5 @@
+import { useRevealOnScroll } from "../hooks/useRevealOnScroll";
+
 export type ProjectCardProps = {
   title: string;
   description: string;
@@ -14,9 +16,10 @@ export default function ProjectCard({
   const tagList = Array.isArray(tags) ? tags : [];
   const external = typeof href === "string" && /^https?:\/\//i.test(href); // http(s) opens new tab; same-repo paths stay in-tab.
   const isPlaceholder = !href || href === "#"; // No public demo URL yet — show resume fallback instead of dead link.
+  const revealRef = useRevealOnScroll<HTMLElement>();
 
   return (
-    <article className="project-card">
+    <article ref={revealRef} className="project-card reveal">
       <h3 className="project-card__title">{title}</h3>
       <p className="project-card__desc">{description}</p>
       {tagList.length > 0 ? (

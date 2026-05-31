@@ -1,4 +1,5 @@
 import type { ProjectCardProps } from "./ProjectCard";
+import { useRevealOnScroll } from "../hooks/useRevealOnScroll";
 
 export default function MobileProjectCard({
   title,
@@ -9,9 +10,13 @@ export default function MobileProjectCard({
   const tagList = Array.isArray(tags) ? tags : [];
   const external = typeof href === "string" && /^https?:\/\//i.test(href); // http(s) opens new tab; same-repo paths stay in-tab.
   const isPlaceholder = !href || href === "#"; // No public demo URL yet — show resume fallback instead of dead link.
+  const revealRef = useRevealOnScroll<HTMLElement>();
 
   return (
-    <article className="project-card project-card--mobile">
+    <article
+      ref={revealRef}
+      className="project-card project-card--mobile reveal"
+    >
       <div className="project-card__body">
         <h3 className="project-card__title">{title}</h3>
         <p className="project-card__desc project-card__desc--clamp">

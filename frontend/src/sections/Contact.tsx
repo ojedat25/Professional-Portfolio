@@ -3,6 +3,7 @@ import { ExternalLink, GitBranch, Mail, Phone } from "lucide-react";
 import { submitContact } from "../api/contact";
 import { ApiError } from "../api/errors";
 import { siteContent } from "../data/siteContent";
+import { useRevealOnScroll } from "../hooks/useRevealOnScroll";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PHONE_REGEX = /^\+?[\d\s\-().]*\d{7,}[\d\s\-().]*$/;
@@ -38,6 +39,7 @@ export default function Contact() {
   const [errors, setErrors] = useState<FieldErrors>({});
   const [submitState, setSubmitState] = useState<SubmitState>("idle");
   const [submitError, setSubmitError] = useState("");
+  const revealRef = useRevealOnScroll<HTMLDivElement>();
 
   const telHref = `tel:${siteContent.phone.replace(/[^\d+]/g, "")}`;
 
@@ -101,7 +103,7 @@ export default function Contact() {
   const iconProps = { size: 20, strokeWidth: 2, "aria-hidden": true as const };
 
   return (
-    <div className="contact">
+    <div ref={revealRef} className="contact reveal">
       <p id="contact-label" className="section-label">
         Contact
       </p>
@@ -122,7 +124,11 @@ export default function Contact() {
                   {submitError}
                 </p>
               ) : null}
-              <form className="contact__form" onSubmit={handleSubmit} noValidate>
+              <form
+                className="contact__form"
+                onSubmit={handleSubmit}
+                noValidate
+              >
                 {/* noValidate: browser validation off; messages controlled in submit handler. */}
                 <div className="contact__field">
                   <label className="contact__label" htmlFor="contact-name">
@@ -234,10 +240,7 @@ export default function Contact() {
         </div>
         <ul className="contact__links">
           <li>
-            <a
-              className="contact__link"
-              href={`mailto:${siteContent.email}`}
-            >
+            <a className="contact__link" href={`mailto:${siteContent.email}`}>
               <Mail className="contact__link-icon" {...iconProps} />
               <span>{siteContent.email}</span>
             </a>
