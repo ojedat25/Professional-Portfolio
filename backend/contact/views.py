@@ -65,7 +65,7 @@ def submit_contact(request):
             status=400,
         )
 
-    if not settings.RESEND_API_KEY:
+    if not settings.RESEND_API_KEY or not settings.RESEND_FROM_EMAIL or not settings.CONTACT_RECIPIENT_EMAIL:
         return JsonResponse(
             {"error": "Email service is not configured"},
             status=502,
