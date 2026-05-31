@@ -16,19 +16,6 @@ type FieldErrors = {
 type SubmitState = "idle" | "submitting" | "success" | "error";
 
 function extractApiErrorMessage(err: ApiError): string {
-  if (err.status === 429) {
-    const body = err.body;
-    if (
-      body &&
-      typeof body === "object" &&
-      "error" in body &&
-      typeof (body as { error: unknown }).error === "string"
-    ) {
-      return (body as { error: string }).error;
-    }
-    return "Too many submissions. Please try again later.";
-  }
-
   const body = err.body;
   if (
     body &&
@@ -38,7 +25,9 @@ function extractApiErrorMessage(err: ApiError): string {
   ) {
     return (body as { error: string }).error;
   }
-  return "Something went wrong. Please try again.";
+  return err.status === 429
+    ? "Too many submissions. Please try again later."
+    : "Something went wrong. Please try again.";
 }
 
 export default function Contact() {
@@ -136,7 +125,7 @@ export default function Contact() {
                   <input
                     id="contact-email"
                     className="contact__input"
-                    type="text"
+                    type="email"
                     name="email"
                     autoComplete="email"
                     value={email}
@@ -162,7 +151,7 @@ export default function Contact() {
                   <input
                     id="contact-phone"
                     className="contact__input"
-                    type="text"
+                    type="tel"
                     name="phone"
                     autoComplete="tel"
                     value={phone}

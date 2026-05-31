@@ -26,7 +26,11 @@ def is_rate_limited(
     if cache.add(cache_key, 1, timeout=window_seconds):
         count = 1
     else:
-        count = cache.incr(cache_key)
+        try:
+            count = cache.incr(cache_key)
+        except ValueError:
+            cache.add(cache_key, 1, timeout=window_seconds)
+            count = 1
 
     return count > max_requests
 
