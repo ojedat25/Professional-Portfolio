@@ -57,13 +57,25 @@ function SkillGroup({
 export default function Skills() {
   return (
     <div className="skills">
-      <p id="skills-label" className="section-label">
-        Skills
-      </p>
-      <div className="skills__groups">
-        {SKILL_GROUPS.map((group) => (
-          <SkillGroup key={group.heading} {...group} />
-        ))}
+      <div className="editor editor--section">
+        <div className="editor__bar">
+          <div className="editor__dots" aria-hidden="true">
+            <span className="editor__dot editor__dot--red" />
+            <span className="editor__dot editor__dot--yellow" />
+            <span className="editor__dot editor__dot--green" />
+          </div>
+          <div className="editor__filename">Skills.tsx</div>
+        </div>
+        <div className="editor__body">
+          <p id="skills-label" className="comment">
+            Skills
+          </p>
+          <div className="skills__groups">
+            {SKILL_GROUPS.map((group) => (
+              <SkillGroup key={group.heading} {...group} />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -29,9 +29,6 @@ export default function ProjectsMobile({ projects }: Props) {
 
   return (
     <div className="projects projects--mobile">
-      <p id="work-label" className="section-label">
-        Selected work
-      </p>
       {showNav ? (
         <div className="projects__carousel projects__carousel--mobile">
           <button

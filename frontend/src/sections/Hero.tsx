@@ -18,45 +18,66 @@ export default function Hero() {
   return (
     <section className="hero" aria-labelledby="hero-heading">
       <div className="layout-inner hero__inner">
-        <p
-          className="section-label animate-fade-slide-up"
-          style={{ animationDelay: "0ms" }}
-        >
-          {siteContent.heroEyebrow}
-        </p>
-        <h1
-          id="hero-heading"
-          className="hero__name animate-fade-slide-up"
-          style={{ animationDelay: "150ms" }}
-        >
-          Toni Ojeda<span className="hero__dot">.</span>
-        </h1>
-        <p
-          className="hero__lede muted animate-fade-slide-up"
-          style={{ animationDelay: "300ms" }}
-        >
-          {displayText}
-          <span className="hero__typewriter-cursor" aria-hidden="true" />
-        </p>
-        <div
-          className="hero__actions animate-fade-slide-up"
-          style={{ animationDelay: "450ms" }}
-        >
-          <a
-            className="button button--primary"
-            href="#work"
-            onClick={scrollToWork}
-          >
-            View my work
-          </a>
-          <a
-            className="button button--ghost"
-            href={siteContent.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            GitHub
-          </a>
+        <div className="editor editor--hero">
+          <div className="editor__bar">
+            <div className="editor__dots" aria-hidden="true">
+              <span className="editor__dot editor__dot--red" />
+              <span className="editor__dot editor__dot--yellow" />
+              <span className="editor__dot editor__dot--green" />
+            </div>
+            <div className="editor__filename">Hero.tsx</div>
+          </div>
+          <div className="editor__body editor__body--gutter">
+            <div className="editor__gutter" aria-hidden="true">
+              {Array.from({ length: 10 }).map((_, i) => (
+                <span key={i} className="editor__line">
+                  {i + 1}
+                </span>
+              ))}
+            </div>
+            <div className="editor__main">
+              <p
+                className="comment animate-fade-slide-up"
+                style={{ animationDelay: "0ms" }}
+              >
+                {siteContent.heroEyebrow}
+              </p>
+              <h1
+                id="hero-heading"
+                className="hero__name animate-fade-slide-up"
+                style={{ animationDelay: "150ms" }}
+              >
+                Toni Ojeda<span className="hero__dot">.</span>
+              </h1>
+              <p
+                className="hero__lede muted animate-fade-slide-up"
+                style={{ animationDelay: "300ms" }}
+              >
+                {displayText}
+                <span className="hero__typewriter-cursor" aria-hidden="true" />
+              </p>
+              <div
+                className="hero__actions animate-fade-slide-up"
+                style={{ animationDelay: "450ms" }}
+              >
+                <a
+                  className="button button--primary"
+                  href="#work"
+                  onClick={scrollToWork}
+                >
+                  View my work
+                </a>
+                <a
+                  className="button button--ghost"
+                  href={siteContent.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  GitHub
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

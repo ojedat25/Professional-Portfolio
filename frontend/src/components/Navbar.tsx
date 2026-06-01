@@ -36,6 +36,13 @@ function scrollToTop(event: MouseEvent<HTMLAnchorElement>) {
 
 const MENU_PANEL_ID = "primary-menu";
 
+const NAV_ITEMS = [
+  { id: "work", label: "Work" },
+  { id: "skills", label: "Skills" },
+  { id: "about", label: "About" },
+  { id: "contact", label: "Contact" },
+] as const;
+
 function ThemeCycleButton() {
   const { theme, resolvedTheme, cycleTheme } = useTheme();
 
@@ -85,7 +92,7 @@ function ThemeCycleButton() {
 }
 
 /** Mobile navbar */
-function NavbarNarrow() {
+function NavbarNarrow({ activeId }: { activeId: string }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -140,34 +147,18 @@ function NavbarNarrow() {
           className="site-nav__panel"
           aria-label="Primary"
         >
-          <a
-            className="site-nav__link site-nav__link--stacked"
-            href="#work"
-            onClick={(mouseEvent) => handleNavClick(mouseEvent, "work")}
-          >
-            Work
-          </a>
-          <a
-            className="site-nav__link site-nav__link--stacked"
-            href="#skills"
-            onClick={(mouseEvent) => handleNavClick(mouseEvent, "skills")}
-          >
-            Skills
-          </a>
-          <a
-            className="site-nav__link site-nav__link--stacked"
-            href="#about"
-            onClick={(mouseEvent) => handleNavClick(mouseEvent, "about")}
-          >
-            About
-          </a>
-          <a
-            className="site-nav__link site-nav__link--stacked"
-            href="#contact"
-            onClick={(mouseEvent) => handleNavClick(mouseEvent, "contact")}
-          >
-            Contact
-          </a>
+          {NAV_ITEMS.map((item) => (
+            <a
+              key={item.id}
+              className={`site-nav__link site-nav__link--stacked${
+                activeId === item.id ? " active" : ""
+              }`}
+              href={`#${item.id}`}
+              onClick={(mouseEvent) => handleNavClick(mouseEvent, item.id)}
+            >
+              {item.label}
+            </a>
+          ))}
         </nav>
       </div>
       {menuOpen && typeof document !== "undefined"
@@ -187,11 +178,47 @@ function NavbarNarrow() {
 
 export default function Navbar() {
   const isNarrow = useIsNarrowProjects();
+  const [activeId, setActiveId] = useState<string>(() => {
+    const hash = typeof window !== "undefined" ? window.location.hash : "";
+    const normalized = hash.startsWith("#") ? hash.slice(1) : hash;
+    return NAV_ITEMS.some((item) => item.id === normalized)
+      ? normalized
+      : NAV_ITEMS[0].id;
+  });
+
+  useEffect(() => {
+    const elements = NAV_ITEMS.map((item) =>
+      document.getElementById(item.id),
+    ).filter((el): el is HTMLElement => Boolean(el));
+
+    if (elements.length === 0) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const intersecting = entries.filter((entry) => entry.isIntersecting);
+        if (intersecting.length === 0) {
+          return;
+        }
+        intersecting.sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        const top = intersecting[0];
+        const id = top.target instanceof HTMLElement ? top.target.id : "";
+        if (NAV_ITEMS.some((item) => item.id === id)) {
+          setActiveId(id);
+        }
+      },
+      { root: null, rootMargin: "-45% 0px -50% 0px", threshold: [0, 0.1, 0.25] },
+    );
+
+    elements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <header className="site-nav">
       {isNarrow ? (
-        <NavbarNarrow />
+        <NavbarNarrow activeId={activeId} />
       ) : (
         <div className="layout-inner site-nav__inner">
           <a className="site-nav__brand" href="/" onClick={scrollToTop}>
@@ -199,34 +226,18 @@ export default function Navbar() {
           </a>
           <div className="site-nav__end">
             <nav className="site-nav__links" aria-label="Primary">
-              <a
-                className="site-nav__link"
-                href="#work"
-                onClick={(mouseEvent) => scrollToId(mouseEvent, "work")}
-              >
-                Work
-              </a>
-              <a
-                className="site-nav__link"
-                href="#skills"
-                onClick={(mouseEvent) => scrollToId(mouseEvent, "skills")}
-              >
-                Skills
-              </a>
-              <a
-                className="site-nav__link"
-                href="#about"
-                onClick={(mouseEvent) => scrollToId(mouseEvent, "about")}
-              >
-                About
-              </a>
-              <a
-                className="site-nav__link"
-                href="#contact"
-                onClick={(mouseEvent) => scrollToId(mouseEvent, "contact")}
-              >
-                Contact
-              </a>
+              {NAV_ITEMS.map((item) => (
+                <a
+                  key={item.id}
+                  className={`site-nav__link${
+                    activeId === item.id ? " active" : ""
+                  }`}
+                  href={`#${item.id}`}
+                  onClick={(mouseEvent) => scrollToId(mouseEvent, item.id)}
+                >
+                  {item.label}
+                </a>
+              ))}
             </nav>
             <ThemeCycleButton />
           </div>
