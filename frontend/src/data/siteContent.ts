@@ -21,6 +21,7 @@ export type SiteContent = {
   resumeUrl: string;
   heroEyebrow: string;
   heroLede: string;
+  heroRotatingTitles: string[];
   bio: string;
   aboutExtra: string[];
   educationShort: string[];
@@ -38,6 +39,12 @@ export const siteContent: SiteContent = {
   heroEyebrow: "Software developer - Minneapolis",
   heroLede:
     "I'm Toni, a full-stack developer based in Minneapolis. I build apps and websites, and I build them well.",
+  heroRotatingTitles: [
+    "FULL-STACK DEVELOPER",
+    "REACT ENGINEER",
+    "Django + TypeScript",
+    "OPEN TO WORK",
+  ],
 
   bio: `I just finished my Computer Science degree at Augsburg University, and I've spent the last couple years building actual things alongside my coursework. A payment integration at my internship, a desktop app with my senior team, an iOS nutrition tracker I built for myself because I couldn't find one I liked.
 

@@ -1,5 +1,7 @@
+import type { CSSProperties } from "react";
 import type { ProjectCardProps } from "./ProjectCard";
 import { PROJECT_CARD_ENTRANCE_STAGGER_MS } from "../data/projectsCarousel";
+import { useRevealOnScroll } from "../hooks/useRevealOnScroll";
 
 function titleToFilename(title: string): string {
   const parts = title
@@ -19,17 +21,23 @@ export default function MobileProjectCard({
   href,
   entranceIndex = 0,
 }: ProjectCardProps) {
+  const revealRef = useRevealOnScroll<HTMLElement>();
   const tagList = Array.isArray(tags) ? tags : [];
   const external = typeof href === "string" && /^https?:\/\//i.test(href); // http(s) opens new tab; same-repo paths stay in-tab.
   const isPlaceholder = !href || href === "#"; // No public demo URL yet — show resume fallback instead of dead link.
   const filename = titleToFilename(title);
+  const slideDirClass =
+    entranceIndex % 2 === 0 ? "reveal--from-left" : "reveal--from-right";
 
   return (
     <article
-      className="pcard pcard--mobile animate-fade-slide-up"
-      style={{
-        animationDelay: `${entranceIndex * PROJECT_CARD_ENTRANCE_STAGGER_MS}ms`,
-      }}
+      ref={revealRef}
+      className={`pcard pcard--mobile reveal ${slideDirClass}`}
+      style={
+        {
+          "--reveal-delay": `${entranceIndex * PROJECT_CARD_ENTRANCE_STAGGER_MS}ms`,
+        } as CSSProperties
+      }
     >
       <div className="pcard__bar">
         <div className="pcard__dots" aria-hidden="true">

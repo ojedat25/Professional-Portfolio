@@ -44,9 +44,14 @@ function SkillGroup({
     >
       <h2 className="skills__heading">{heading}</h2>
       <ul className="skills__chips" aria-label={ariaLabel}>
-        {items.map((item) => (
+        {items.map((item, index) => (
           <li key={item}>
-            <span className="skill-chip">{item}</span>
+            <span
+              className="skill-chip"
+              style={{ "--i": index } as CSSProperties}
+            >
+              {item}
+            </span>
           </li>
         ))}
       </ul>

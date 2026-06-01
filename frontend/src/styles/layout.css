@@ -306,7 +306,7 @@
   margin-top: 0.75rem;
 }
 
-.hero__dot {
+.hero__period {
   color: var(--highlight);
 }
 
@@ -333,6 +333,49 @@
   margin-top: 2rem;
 }
 
+/* Reveal variants (override base .reveal in index.css). */
+.reveal {
+  --reveal-x: 0px;
+  transform: translate3d(var(--reveal-x), 24px, 0);
+}
+
+.reveal--from-left {
+  --reveal-x: -16px;
+}
+
+.reveal--from-right {
+  --reveal-x: 16px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal.is-visible {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.scroll-progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 3px;
+  z-index: 9999;
+  pointer-events: none;
+  background: transparent;
+}
+
+.scroll-progress__bar {
+  height: 100%;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: color-mix(in srgb, var(--highlight) 80%, transparent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .scroll-progress__bar {
+    transition: transform 120ms linear;
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .animate-fade-slide-up {
     animation: fade-slide-up 0.5s ease both;
@@ -340,6 +383,10 @@
 
   .hero__typewriter-cursor {
     animation: blink 1s step-end infinite;
+  }
+
+  .hero__period {
+    animation: blink 1.1s step-end infinite;
   }
 }
 
@@ -487,6 +534,29 @@
   background: var(--surface-ghost);
 }
 
+@keyframes skill-pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .skills__group .skill-chip {
+    opacity: 0;
+    transform: translateY(10px) scale(0.96);
+  }
+
+  .skills__group.is-visible .skill-chip {
+    animation: skill-pop-in 0.45s cubic-bezier(0.2, 0.9, 0.2, 1) both;
+    animation-delay: calc(var(--reveal-delay, 0ms) + (var(--i, 0) * 55ms));
+  }
+}
+
 /* Repo tile; modifier .project-card--mobile tightens spacing. */
 .project-card {
   display: flex;
@@ -603,8 +673,10 @@
 
 .pcard:hover {
   border-color: color-mix(in srgb, var(--highlight) 35%, var(--border));
-  transform: translateY(-5px);
-  box-shadow: 0 8px 24px var(--shadow);
+  transform: translateY(-6px);
+  box-shadow:
+    0 14px 32px -12px color-mix(in srgb, var(--highlight) 28%, transparent),
+    0 8px 24px var(--shadow);
 }
 
 .pcard__bar {
@@ -701,6 +773,18 @@
   border-radius: 999px;
   border: 1px solid var(--border);
   color: var(--secondary);
+  transition:
+    transform 0.15s ease,
+    border-color 0.2s,
+    background 0.2s,
+    color 0.2s;
+}
+
+.pcard__tag:hover {
+  transform: translateY(-1px) scale(1.04);
+  border-color: color-mix(in srgb, var(--highlight) 45%, var(--border));
+  background: var(--social-bg);
+  color: var(--highlight);
 }
 
 .pcard__actions {
