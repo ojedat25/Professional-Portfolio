@@ -10,6 +10,13 @@ export function useTypewriter(
   const reducedMotion = usePrefersReducedMotion();
   const [displayText, setDisplayText] = useState("");
   const [isComplete, setIsComplete] = useState(false);
+  const [prevText, setPrevText] = useState(text);
+
+  if (!reducedMotion && text !== prevText) {
+    setPrevText(text);
+    setDisplayText("");
+    setIsComplete(false);
+  }
 
   useEffect(() => {
     if (reducedMotion) return;
@@ -17,12 +24,6 @@ export function useTypewriter(
     let index = 0;
     let intervalId: ReturnType<typeof setInterval> | undefined;
     let cancelled = false;
-
-    queueMicrotask(() => {
-      if (cancelled) return;
-      setDisplayText("");
-      setIsComplete(false);
-    });
 
     const delayId = setTimeout(() => {
       if (cancelled) return;
