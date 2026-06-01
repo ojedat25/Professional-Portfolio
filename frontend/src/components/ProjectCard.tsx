@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import { PROJECT_CARD_ENTRANCE_STAGGER_MS } from "../data/projectsCarousel";
 import { useRevealOnScroll } from "../hooks/useRevealOnScroll";
+import { titleToFilename } from "../utils/stringUtils";
 
 export type ProjectCardProps = {
   title: string;
@@ -9,17 +10,6 @@ export type ProjectCardProps = {
   href: string;
   entranceIndex?: number;
 };
-
-function titleToFilename(title: string): string {
-  const parts = title
-    .trim()
-    .split(/[^a-zA-Z0-9]+/g)
-    .filter(Boolean);
-  const pascal = parts
-    .map((p) => `${p.charAt(0).toUpperCase()}${p.slice(1)}`)
-    .join("");
-  return `${pascal || "Project"}.tsx`;
-}
 
 export default function ProjectCard({
   title,

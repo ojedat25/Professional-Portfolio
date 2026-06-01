@@ -1,24 +1,5 @@
-import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
-
-const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
-
-function subscribeReducedMotion(onChange: () => void): () => void {
-  const mq = window.matchMedia(REDUCED_MOTION_QUERY);
-  mq.addEventListener("change", onChange);
-  return () => mq.removeEventListener("change", onChange);
-}
-
-function getReducedMotionSnapshot(): boolean {
-  return window.matchMedia(REDUCED_MOTION_QUERY).matches;
-}
-
-function usePrefersReducedMotion(): boolean {
-  return useSyncExternalStore(
-    subscribeReducedMotion,
-    getReducedMotionSnapshot,
-    () => false,
-  );
-}
+import { useEffect, useMemo, useState } from "react";
+import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
 
 function getScrollProgress(): number {
   const root = document.documentElement;

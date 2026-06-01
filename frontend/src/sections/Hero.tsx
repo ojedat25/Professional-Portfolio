@@ -1,26 +1,12 @@
-import { useEffect, useState, useSyncExternalStore, type MouseEvent } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 import { siteContent } from "../data/siteContent";
 import { useTypewriter } from "../hooks/useTypewriter";
+import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
 
-const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
-
-function subscribeReducedMotion(onChange: () => void): () => void {
-  const mq = window.matchMedia(REDUCED_MOTION_QUERY);
-  mq.addEventListener("change", onChange);
-  return () => mq.removeEventListener("change", onChange);
-}
-
-function getReducedMotionSnapshot(): boolean {
-  return window.matchMedia(REDUCED_MOTION_QUERY).matches;
-}
-
-function usePrefersReducedMotion(): boolean {
-  return useSyncExternalStore(
-    subscribeReducedMotion,
-    getReducedMotionSnapshot,
-    () => false,
-  );
-}
+const ROTATING_TITLES =
+  siteContent.heroRotatingTitles.length > 0
+    ? siteContent.heroRotatingTitles
+    : [siteContent.heroLede];
 
 function scrollToWork(event: MouseEvent<HTMLAnchorElement>) {
   // preventDefault + scrollIntoView for smooth scroll; replaceState updates hash without reload jump.
@@ -34,26 +20,23 @@ function scrollToWork(event: MouseEvent<HTMLAnchorElement>) {
 
 export default function Hero() {
   const reducedMotion = usePrefersReducedMotion();
-  const titles =
-    siteContent.heroRotatingTitles.length > 0
-      ? siteContent.heroRotatingTitles
-      : [siteContent.heroLede];
   const [titleIndex, setTitleIndex] = useState(0);
-  const currentTitle = titles[titleIndex] ?? titles[0] ?? siteContent.heroLede;
+  const currentTitle =
+    ROTATING_TITLES[titleIndex] ?? ROTATING_TITLES[0] ?? siteContent.heroLede;
   const { displayText, isComplete } = useTypewriter(currentTitle);
 
   useEffect(() => {
     if (reducedMotion) return;
-    if (titles.length <= 1) return;
+    if (ROTATING_TITLES.length <= 1) return;
     if (!isComplete) return;
 
     const HOLD_MS = 1400;
     const timeoutId = window.setTimeout(() => {
-      setTitleIndex((i) => (i + 1) % titles.length);
+      setTitleIndex((i) => (i + 1) % ROTATING_TITLES.length);
     }, HOLD_MS);
 
     return () => window.clearTimeout(timeoutId);
-  }, [isComplete, reducedMotion, titles.length]);
+  }, [isComplete, reducedMotion]);
 
   return (
     <section className="hero" aria-labelledby="hero-heading">

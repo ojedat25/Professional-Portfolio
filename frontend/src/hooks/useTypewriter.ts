@@ -1,25 +1,7 @@
-import { useEffect, useState, useSyncExternalStore } from "react";
+import { useEffect, useState } from "react";
+import { usePrefersReducedMotion } from "./usePrefersReducedMotion";
 
 const INITIAL_DELAY_MS = 500;
-const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
-
-function subscribeReducedMotion(onChange: () => void): () => void {
-  const mq = window.matchMedia(REDUCED_MOTION_QUERY);
-  mq.addEventListener("change", onChange);
-  return () => mq.removeEventListener("change", onChange);
-}
-
-function getReducedMotionSnapshot(): boolean {
-  return window.matchMedia(REDUCED_MOTION_QUERY).matches;
-}
-
-function usePrefersReducedMotion(): boolean {
-  return useSyncExternalStore(
-    subscribeReducedMotion,
-    getReducedMotionSnapshot,
-    () => false,
-  );
-}
 
 export function useTypewriter(
   text: string,
@@ -36,11 +18,11 @@ export function useTypewriter(
     let intervalId: ReturnType<typeof setInterval> | undefined;
     let cancelled = false;
 
-    const resetId = setTimeout(() => {
+    queueMicrotask(() => {
       if (cancelled) return;
       setDisplayText("");
       setIsComplete(false);
-    }, 0);
+    });
 
     const delayId = setTimeout(() => {
       if (cancelled) return;
@@ -56,7 +38,6 @@ export function useTypewriter(
 
     return () => {
       cancelled = true;
-      clearTimeout(resetId);
       clearTimeout(delayId);
       if (intervalId !== undefined) clearInterval(intervalId);
     };
