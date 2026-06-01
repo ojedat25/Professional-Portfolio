@@ -34,12 +34,12 @@ function SkillGroup({
   ariaLabel: string;
   delay: string;
 }) {
-  const revealRef = useRevealOnScroll<HTMLDivElement>();
+  const { ref: revealRef, isVisible } = useRevealOnScroll<HTMLDivElement>();
 
   return (
     <div
       ref={revealRef}
-      className="skills__group reveal"
+      className={`skills__group reveal ${isVisible ? "is-visible" : ""}`}
       style={{ "--reveal-delay": delay } as CSSProperties}
     >
       <h2 className="skills__heading">{heading}</h2>

@@ -108,7 +108,7 @@ export default function Contact() {
   const [errors, setErrors] = useState<FieldErrors>({});
   const [submitState, setSubmitState] = useState<SubmitState>("idle");
   const [submitError, setSubmitError] = useState("");
-  const revealRef = useRevealOnScroll<HTMLDivElement>();
+  const { ref: revealRef, isVisible } = useRevealOnScroll<HTMLDivElement>();
 
   const telHref = `tel:${siteContent.phone.replace(/[^\d+]/g, "")}`;
 
@@ -172,7 +172,10 @@ export default function Contact() {
   const iconProps = { size: 20, strokeWidth: 2, "aria-hidden": true as const };
 
   return (
-    <div ref={revealRef} className="contact reveal">
+    <div
+      ref={revealRef}
+      className={`contact reveal ${isVisible ? "is-visible" : ""}`}
+    >
       <div className="editor editor--section">
         <div className="editor__bar">
           <div className="editor__dots" aria-hidden="true">

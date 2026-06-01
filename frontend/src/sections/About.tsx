@@ -2,10 +2,13 @@ import { siteContent } from "../data/siteContent";
 import { useRevealOnScroll } from "../hooks/useRevealOnScroll";
 
 export default function About() {
-  const revealRef = useRevealOnScroll<HTMLDivElement>();
+  const { ref: revealRef, isVisible } = useRevealOnScroll<HTMLDivElement>();
 
   return (
-    <div ref={revealRef} className="about reveal">
+    <div
+      ref={revealRef}
+      className={`about reveal ${isVisible ? "is-visible" : ""}`}
+    >
       <div className="editor editor--section">
         <div className="editor__bar">
           <div className="editor__dots" aria-hidden="true">

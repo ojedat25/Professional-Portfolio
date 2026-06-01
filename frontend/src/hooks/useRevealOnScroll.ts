@@ -1,7 +1,8 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function useRevealOnScroll<T extends HTMLElement = HTMLElement>() {
   const ref = useRef<T>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
@@ -10,7 +11,7 @@ export function useRevealOnScroll<T extends HTMLElement = HTMLElement>() {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          el.classList.add("is-visible");
+          setIsVisible(true);
           observer.disconnect();
         }
       },
@@ -21,5 +22,5 @@ export function useRevealOnScroll<T extends HTMLElement = HTMLElement>() {
     return () => observer.disconnect();
   }, []);
 
-  return ref;
+  return { ref, isVisible };
 }

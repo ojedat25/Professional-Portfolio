@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { usePrefersReducedMotion } from "./usePrefersReducedMotion";
 
 const INITIAL_DELAY_MS = 500;
@@ -10,13 +10,19 @@ export function useTypewriter(
   const reducedMotion = usePrefersReducedMotion();
   const [displayText, setDisplayText] = useState("");
   const [isComplete, setIsComplete] = useState(false);
-  const [prevText, setPrevText] = useState(text);
 
-  if (!reducedMotion && text !== prevText) {
-    setPrevText(text);
-    setDisplayText("");
-    setIsComplete(false);
-  }
+  useLayoutEffect(() => {
+    if (reducedMotion) return;
+    let active = true;
+    queueMicrotask(() => {
+      if (!active) return;
+      setDisplayText("");
+      setIsComplete(false);
+    });
+    return () => {
+      active = false;
+    };
+  }, [text, reducedMotion]);
 
   useEffect(() => {
     if (reducedMotion) return;

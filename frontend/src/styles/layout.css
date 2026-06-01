@@ -335,8 +335,13 @@
 
 /* Reveal variants (override base .reveal in index.css). */
 .reveal {
+  opacity: 0;
   --reveal-x: 0px;
   transform: translate3d(var(--reveal-x), 24px, 0);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+  transition-delay: var(--reveal-delay, 0ms);
 }
 
 .reveal--from-left {
@@ -349,6 +354,7 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .reveal.is-visible {
+    opacity: 1;
     transform: translate3d(0, 0, 0);
   }
 }
@@ -576,7 +582,7 @@
 .project-card:hover {
   border-color: color-mix(in srgb, var(--highlight) 35%, var(--border));
   transform: translateY(-5px);
-  box-shadow: 0 8px 24px var(--shadow);
+  box-shadow: var(--shadow);
 }
 
 /* No link when repo has no homepage URL to show. */
@@ -676,7 +682,7 @@
   transform: translateY(-6px);
   box-shadow:
     0 14px 32px -12px color-mix(in srgb, var(--highlight) 28%, transparent),
-    0 8px 24px var(--shadow);
+    var(--shadow);
 }
 
 .pcard__bar {

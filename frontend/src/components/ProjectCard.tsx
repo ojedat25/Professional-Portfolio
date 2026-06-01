@@ -18,7 +18,7 @@ export default function ProjectCard({
   href,
   entranceIndex = 0,
 }: ProjectCardProps) {
-  const revealRef = useRevealOnScroll<HTMLElement>();
+  const { ref: revealRef, isVisible } = useRevealOnScroll<HTMLElement>();
   const tagList = Array.isArray(tags) ? tags : [];
   const external = typeof href === "string" && /^https?:\/\//i.test(href); // http(s) opens new tab; same-repo paths stay in-tab.
   const isPlaceholder = !href || href === "#"; // No public demo URL yet — show resume fallback instead of dead link.
@@ -29,7 +29,7 @@ export default function ProjectCard({
   return (
     <article
       ref={revealRef}
-      className={`pcard reveal ${slideDirClass}`}
+      className={`pcard reveal ${isVisible ? "is-visible" : ""} ${slideDirClass}`}
       style={
         {
           "--reveal-delay": `${entranceIndex * PROJECT_CARD_ENTRANCE_STAGGER_MS}ms`,
