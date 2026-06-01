@@ -176,6 +176,15 @@
   line-height: 1.55;
 }
 
+.hero__typewriter-cursor {
+  display: inline-block;
+  width: 0.075em;
+  height: 1em;
+  margin-inline-start: 0.06em;
+  vertical-align: -0.08em;
+  background: currentColor;
+}
+
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
@@ -190,10 +199,6 @@
 
   .hero__typewriter-cursor {
     animation: blink 1s step-end infinite;
-  }
-
-  .hero__typewriter-cursor--done {
-    animation: none;
   }
 }
 

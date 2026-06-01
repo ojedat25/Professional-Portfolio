@@ -13,7 +13,7 @@ function scrollToWork(event: MouseEvent<HTMLAnchorElement>) {
 }
 
 export default function Hero() {
-  const { displayText, isComplete } = useTypewriter(siteContent.heroLede);
+  const { displayText } = useTypewriter(siteContent.heroLede);
 
   return (
     <section className="hero" aria-labelledby="hero-heading">
@@ -36,12 +36,7 @@ export default function Hero() {
           style={{ animationDelay: "300ms" }}
         >
           {displayText}
-          <span
-            className={`hero__typewriter-cursor${isComplete ? " hero__typewriter-cursor--done" : ""}`}
-            aria-hidden="true"
-          >
-            |
-          </span>
+          <span className="hero__typewriter-cursor" aria-hidden="true" />
         </p>
         <div
           className="hero__actions animate-fade-slide-up"

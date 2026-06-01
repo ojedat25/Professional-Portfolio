@@ -1,8 +1,11 @@
 import { siteContent } from "../data/siteContent";
+import { useRevealOnScroll } from "../hooks/useRevealOnScroll";
 
 export default function About() {
+  const revealRef = useRevealOnScroll<HTMLDivElement>();
+
   return (
-    <div className="about">
+    <div ref={revealRef} className="about reveal">
       <p id="about-label" className="section-label">
         About
       </p>
