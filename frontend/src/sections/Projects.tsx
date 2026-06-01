@@ -29,9 +29,6 @@ export default function Projects({ projects }: Props) {
 
   return (
     <div className="projects projects--desktop">
-      <p id="work-label" className="section-label">
-        Selected work
-      </p>
       {showNav ? (
         <div className="projects__carousel projects__carousel--desktop">
           <button
@@ -44,9 +41,10 @@ export default function Projects({ projects }: Props) {
             <ChevronLeft size={26} strokeWidth={2} aria-hidden="true" />
           </button>
           <div className="projects__grid projects__grid--carousel">
-            {visible.map((project) => (
+            {visible.map((project, index) => (
               <ProjectCard
                 key={project.id}
+                entranceIndex={index}
                 title={project.title}
                 description={project.description ?? ""}
                 tags={project.tags}
@@ -66,9 +64,10 @@ export default function Projects({ projects }: Props) {
         </div>
       ) : (
         <div className="projects__grid">
-          {projects.map((project) => (
+          {projects.map((project, index) => (
             <ProjectCard
               key={project.id}
+              entranceIndex={index}
               title={project.title}
               description={project.description ?? ""}
               tags={project.tags}

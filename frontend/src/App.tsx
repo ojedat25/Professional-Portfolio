@@ -1,5 +1,7 @@
 /* Page shell: Navbar + main sections with id, aria-labelledby, and layout-inner for hash links and scroll offsets. */
 import Navbar from "./components/Navbar";
+import ScrollProgress from "./components/ScrollProgress";
+import StatusBar from "./components/StatusBar";
 import Hero from "./sections/Hero";
 import ProjectsSection from "./sections/ProjectsSection";
 import Skills from "./sections/Skills";
@@ -9,6 +11,7 @@ import Contact from "./sections/Contact";
 export default function App() {
   return (
     <>
+      <ScrollProgress />
       <Navbar />
       <main className="main">
         <Hero />
@@ -49,6 +52,7 @@ export default function App() {
           </div>
         </section>
       </main>
+      <StatusBar />
     </>
   );
 }

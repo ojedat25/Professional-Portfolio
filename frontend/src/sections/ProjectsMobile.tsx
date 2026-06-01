@@ -29,9 +29,6 @@ export default function ProjectsMobile({ projects }: Props) {
 
   return (
     <div className="projects projects--mobile">
-      <p id="work-label" className="section-label">
-        Selected work
-      </p>
       {showNav ? (
         <div className="projects__carousel projects__carousel--mobile">
           <button
@@ -44,9 +41,10 @@ export default function ProjectsMobile({ projects }: Props) {
             <ChevronUp size={26} strokeWidth={2} aria-hidden="true" />
           </button>
           <div className="projects__grid projects__grid--mobile">
-            {visible.map((project) => (
+            {visible.map((project, index) => (
               <MobileProjectCard
                 key={project.id}
+                entranceIndex={index}
                 title={project.title}
                 description={project.description ?? ""}
                 tags={project.tags}
@@ -66,9 +64,10 @@ export default function ProjectsMobile({ projects }: Props) {
         </div>
       ) : (
         <div className="projects__grid projects__grid--mobile">
-          {projects.map((project) => (
+          {projects.map((project, index) => (
             <MobileProjectCard
               key={project.id}
+              entranceIndex={index}
               title={project.title}
               description={project.description ?? ""}
               tags={project.tags}

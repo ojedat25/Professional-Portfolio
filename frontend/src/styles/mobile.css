@@ -2,7 +2,8 @@
 
 @media (max-width: 1024px) {
   html {
-    font-size: 16px;
+    --type-size-base: 16px;
+    font-size: var(--type-size-base);
   }
 
   /* Narrow breakpoint: theme + menu buttons in a cluster. */
