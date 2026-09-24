@@ -58,47 +58,60 @@ export default function Hero() {
                 </span>
               ))}
             </div>
-            <div className="editor__main">
-              <p
-                className="comment animate-fade-slide-up"
-                style={{ animationDelay: "0ms" }}
-              >
-                {siteContent.heroEyebrow}
-              </p>
-              <h1
-                id="hero-heading"
-                className="hero__name animate-fade-slide-up"
-                style={{ animationDelay: "150ms" }}
-              >
-                Toni Ojeda<span className="hero__period">.</span>
-              </h1>
-              <p
-                className="hero__lede muted animate-fade-slide-up"
-                style={{ animationDelay: "300ms" }}
-              >
-                {displayText}
-                <span className="hero__typewriter-cursor" aria-hidden="true" />
-              </p>
-              <div
-                className="hero__actions animate-fade-slide-up"
-                style={{ animationDelay: "450ms" }}
-              >
-                <a
-                  className="button button--primary"
-                  href="#work"
-                  onClick={scrollToWork}
+            <div className="editor__main hero__content">
+              <div className="hero__copy">
+                <p
+                  className="comment animate-fade-slide-up"
+                  style={{ animationDelay: "0ms" }}
                 >
-                  View my work
-                </a>
-                <a
-                  className="button button--ghost"
-                  href={siteContent.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  {siteContent.heroEyebrow}
+                </p>
+                <h1
+                  id="hero-heading"
+                  className="hero__name animate-fade-slide-up"
+                  style={{ animationDelay: "150ms" }}
                 >
-                  GitHub
-                </a>
+                  Toni Ojeda<span className="hero__period">.</span>
+                </h1>
+                <p
+                  className="hero__lede muted animate-fade-slide-up"
+                  style={{ animationDelay: "300ms" }}
+                >
+                  {displayText}
+                  <span
+                    className="hero__typewriter-cursor"
+                    aria-hidden="true"
+                  />
+                </p>
+                <div
+                  className="hero__actions animate-fade-slide-up"
+                  style={{ animationDelay: "450ms" }}
+                >
+                  <a
+                    className="button button--primary"
+                    href="#work"
+                    onClick={scrollToWork}
+                  >
+                    View my work
+                  </a>
+                  <a
+                    className="button button--ghost"
+                    href={siteContent.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    GitHub
+                  </a>
+                </div>
               </div>
+              <img
+                className="hero__avatar animate-fade-slide-up"
+                style={{ animationDelay: "150ms" }}
+                src="/pfp.jpeg"
+                alt="Portrait of Toni Ojeda"
+                width={240}
+                height={240}
+              />
             </div>
           </div>
         </div>
